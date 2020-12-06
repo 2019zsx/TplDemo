@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\TplDemo\bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TplDemo.Common\TplDemo.Common.csproj" />
+    <ProjectReference Include="..\TplDemo.IServices\TplDemo.IServices.csproj" />
+    <ProjectReference Include="..\TplDemo.Repository\TplDemo.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

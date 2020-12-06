@@ -1,0 +1,13 @@
+{
+  "author": "Hugh Wang", 
+  "classifications": [ "Web/WebAPI" ],
+  "name": "TplDemo", 
+  "identity": "TplDemoTemplate",
+  "shortName": "tpl",
+  "tags": {
+    "language": "C#" ,
+    "type":"project"
+  },
+  "sourceName": "TplDemo",
+  "preferNameDirectory": true
+}

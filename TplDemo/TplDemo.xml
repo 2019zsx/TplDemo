@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TplDemo</name>
+    </assembly>
+    <members>
+        <member name="T:TplDemo.Controllers.AccountController">
+            <summary>
+            用户登录信息
+            </summary>
+        </member>
+        <member name="F:TplDemo.Controllers.AccountController.dbsysUserInfoIServices">
+            <summary>
+            获取用户信息
+            </summary>
+        </member>
+        <member name="F:TplDemo.Controllers.AccountController.dbRoleIServices">
+            <summary>
+            获取角色信息
+            </summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AccountController.#ctor(TplDemo.IServices.sysUserInfoIServices,TplDemo.IServices.RoleIServices,TplDemo.Common.HttpContextUser.IUser)">
+             <summary>
+            
+             </summary>
+             <param name="_dbsysUserInfoIServices"></param>
+             <param name="_dbRoleIServices"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.AccountController.SystemLogin(TplDemo.Model.ViewModel.ViewLogin)">
+            <summary>
+            系统登录
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.AccountController.GetLoginRole(TplDemo.Model.ViewModel.ViewLoginRole)">
+            <summary>
+            获取角色信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.AccountController.GetUserinfo">
+            <summary>
+            获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.AccountController.Getrefreshtoken(TplDemo.Model.ViewModel.Viewtrefreshtoken)">
+            <summary>
+            刷新token
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TplDemo.Controllers.Log1Controller">
+            <summary>
+             添加日志实例
+            </summary>
+        </member>
+        <member name="M:TplDemo.Controllers.Log1Controller.#ctor(Microsoft.Extensions.Logging.ILogger{TplDemo.Controllers.Log1Controller})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:TplDemo.Controllers.Log1Controller.Log">
+            <summary>
+            添加日志
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TplDemo.Controllers.PermissionController">
+            <summary>
+            权限管理
+            </summary>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.#ctor(TplDemo.Common.HttpContextUser.IUser,TplDemo.IServices.PermissionIServices)">
+             <summary>
+            
+             </summary>
+             <param name="_user"></param>
+             <param name="_dbpermissionIServices"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.GetMenuTree">
+            <summary>
+            获取菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TplDemo.CorsService.SqlsugarSetup">
+            <summary>
+            SqlSugar 启动服务
+            </summary>
+        </member>
+        <member name="M:TplDemo.CorsService.SqlsugarSetup.AddSqlsugarSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+             <summary>
+            
+             </summary>
+             <param name="services"></param>
+        </member>
+        <member name="M:TplDemo.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+             <summary>
+            
+             </summary>
+             <param name="services"></param>
+        </member>
+    </members>
+</doc>
