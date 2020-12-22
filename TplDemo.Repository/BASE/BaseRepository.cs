@@ -56,10 +56,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().In(objId).SingleAsync();
         }
 
-        /// <summary>
-        /// 功能描述:根据ID查询一条数据
-        ///
-        /// </summary>
+        /// <summary>功能描述:根据ID查询一条数据</summary>
         /// <param name="objId">id（必须指定主键特性 [SugarColumn(IsPrimaryKey=true)]），如果是联合主键，请使用Where条件</param>
         /// <param name="blnUseCache">是否使用缓存</param>
         /// <returns>数据实体</returns>
@@ -69,10 +66,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().WithCacheIF(blnUseCache).In(objId).SingleAsync();
         }
 
-        /// <summary>
-        /// 功能描述:根据ID查询数据
-        ///
-        /// </summary>
+        /// <summary>功能描述:根据ID查询数据</summary>
         /// <param name="lstIds">id列表（必须指定主键特性 [SugarColumn(IsPrimaryKey=true)]），如果是联合主键，请使用Where条件</param>
         /// <returns>数据实体列表</returns>
         public async Task<List<TEntity>> QueryByIDs(object[] lstIds)
@@ -81,9 +75,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().In(lstIds).ToListAsync();
         }
 
-        /// <summary>
-        /// 写入实体数据
-        /// </summary>
+        /// <summary>写入实体数据</summary>
         /// <param name="entity">博文实体类</param>
         /// <returns></returns>
         public async Task<int> Add(TEntity entity)
@@ -96,9 +88,7 @@ namespace TplDemo.Repository.BASE
             return await insert.ExecuteReturnIdentityAsync();
         }
 
-        /// <summary>
-        /// 写入实体数据
-        /// </summary>
+        /// <summary>写入实体数据</summary>
         /// <param name="entity">实体类</param>
         /// <param name="insertColumns">指定只插入列</param>
         /// <returns>返回自增量列</returns>
@@ -115,9 +105,7 @@ namespace TplDemo.Repository.BASE
             }
         }
 
-        /// <summary>
-        /// 批量插入实体(速度快)
-        /// </summary>
+        /// <summary>批量插入实体(速度快)</summary>
         /// <param name="listEntity">实体集合</param>
         /// <returns>影响行数</returns>
         public async Task<int> Add(List<TEntity> listEntity)
@@ -125,9 +113,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Insertable(listEntity.ToArray()).ExecuteCommandAsync();
         }
 
-        /// <summary>
-        /// 更新实体数据
-        /// </summary>
+        /// <summary>更新实体数据</summary>
         /// <param name="entity">博文实体类</param>
         /// <returns></returns>
         public async Task<bool> Update(TEntity entity)
@@ -194,9 +180,7 @@ namespace TplDemo.Repository.BASE
             return await up.ExecuteCommandHasChangeAsync();
         }
 
-        /// <summary>
-        /// 根据实体删除一条数据
-        /// </summary>
+        /// <summary>根据实体删除一条数据</summary>
         /// <param name="entity">博文实体类</param>
         /// <returns></returns>
         public async Task<bool> Delete(TEntity entity)
@@ -206,9 +190,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Deleteable(entity).ExecuteCommandHasChangeAsync();
         }
 
-        /// <summary>
-        /// 删除指定ID的数据
-        /// </summary>
+        /// <summary>删除指定ID的数据</summary>
         /// <param name="id">主键ID</param>
         /// <returns></returns>
         public async Task<bool> DeleteById(object id)
@@ -218,9 +200,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Deleteable<TEntity>(id).ExecuteCommandHasChangeAsync();
         }
 
-        /// <summary>
-        /// 删除指定ID集合的数据(批量删除)
-        /// </summary>
+        /// <summary>删除指定ID集合的数据(批量删除)</summary>
         /// <param name="ids">主键ID集合</param>
         /// <returns></returns>
         public async Task<bool> DeleteByIds(object[] ids)
@@ -230,10 +210,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Deleteable<TEntity>().In(ids).ExecuteCommandHasChangeAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询所有数据
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询所有数据</summary>
         /// <returns>数据列表</returns>
         public async Task<List<TEntity>> Query()
         {
@@ -254,10 +231,7 @@ namespace TplDemo.Repository.BASE
             return _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).Select<TResult>(selectExpression).ToList();
         }
 
-        /// <summary>
-        /// 功能描述:查询数据列表
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询数据列表</summary>
         /// <param name="strWhere">条件</param>
         /// <returns>数据列表</returns>
         public async Task<List<TEntity>> Query(string strWhere)
@@ -266,10 +240,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToListAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询数据列表
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询数据列表</summary>
         /// <param name="whereExpression">whereExpression</param>
         /// <returns>数据列表</returns>
         public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression)
@@ -277,10 +248,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).ToListAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询一个列表
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询一个列表</summary>
         /// <param name="whereExpression">条件表达式</param>
         /// <param name="strOrderByFileds">排序字段，如name asc,age desc</param>
         /// <returns>数据列表</returns>
@@ -290,9 +258,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).OrderByIF(strOrderByFileds != null, strOrderByFileds).ToListAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询一个列表
-        /// </summary>
+        /// <summary>功能描述:查询一个列表</summary>
         /// <param name="whereExpression"></param>
         /// <param name="orderByExpression"></param>
         /// <param name="isAsc"></param>
@@ -303,10 +269,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().OrderByIF(orderByExpression != null, orderByExpression, isAsc ? OrderByType.Asc : OrderByType.Desc).WhereIF(whereExpression != null, whereExpression).ToListAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询一个列表
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询一个列表</summary>
         /// <param name="strWhere">条件</param>
         /// <param name="strOrderByFileds">排序字段，如name asc,age desc</param>
         /// <returns>数据列表</returns>
@@ -316,10 +279,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToListAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询前N条数据
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询前N条数据</summary>
         /// <param name="whereExpression">条件表达式</param>
         /// <param name="intTop">前N条</param>
         /// <param name="strOrderByFileds">排序字段，如name asc,age desc</param>
@@ -333,10 +293,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).WhereIF(whereExpression != null, whereExpression).Take(intTop).ToListAsync();
         }
 
-        /// <summary>
-        /// 功能描述:查询前N条数据
-        ///
-        /// </summary>
+        /// <summary>功能描述:查询前N条数据</summary>
         /// <param name="strWhere">条件</param>
         /// <param name="intTop">前N条</param>
         /// <param name="strOrderByFileds">排序字段，如name asc,age desc</param>
@@ -350,9 +307,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).Take(intTop).ToListAsync();
         }
 
-        /// <summary>
-        /// 根据sql语句查询
-        /// </summary>
+        /// <summary>根据sql语句查询</summary>
         /// <param name="strSql">完整的sql语句</param>
         /// <param name="parameters">参数</param>
         /// <returns>泛型集合</returns>
@@ -361,9 +316,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Ado.SqlQueryAsync<TEntity>(strSql, parameters);
         }
 
-        /// <summary>
-        /// 根据sql语句查询
-        /// </summary>
+        /// <summary>根据sql语句查询</summary>
         /// <param name="strSql">完整的sql语句</param>
         /// <param name="parameters">参数</param>
         /// <returns>DataTable</returns>
@@ -372,10 +325,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Ado.GetDataTableAsync(strSql, parameters);
         }
 
-        /// <summary>
-        /// 功能描述:分页查询
-        ///
-        /// </summary>
+        /// <summary>功能描述:分页查询</summary>
         /// <param name="whereExpression">条件表达式</param>
         /// <param name="intPageIndex">页码（下标0）</param>
         /// <param name="intPageSize">页大小</param>
@@ -392,10 +342,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).WhereIF(whereExpression != null, whereExpression).ToPageListAsync(intPageIndex, intPageSize);
         }
 
-        /// <summary>
-        /// 功能描述:分页查询
-        ///
-        /// </summary>
+        /// <summary>功能描述:分页查询</summary>
         /// <param name="strWhere">条件</param>
         /// <param name="intPageIndex">页码（下标0）</param>
         /// <param name="intPageSize">页大小</param>
@@ -413,9 +360,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToPageListAsync(intPageIndex, intPageSize);
         }
 
-        /// <summary>
-        /// 分页查询[使用版本，其他分页未测试]
-        /// </summary>
+        /// <summary>分页查询[使用版本，其他分页未测试]</summary>
         /// <param name="whereExpression">条件表达式</param>
         /// <param name="intPageIndex">页码（下标0）</param>
         /// <param name="intPageSize">页大小</param>
@@ -456,9 +401,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
         }
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
@@ -467,9 +410,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Ado.GetDateTimeAsync(sql, parameters);
         }
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
@@ -479,9 +420,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Ado.GetDecimalAsync(sql, parameters);
         }
 
-        /// <summary>
-        /// 查询返回单条记录(int)
-        /// </summary>
+        /// <summary>查询返回单条记录(int)</summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
@@ -491,9 +430,7 @@ namespace TplDemo.Repository.BASE
         }
 
         //以下为返回string
-        /// <summary>
-        /// 查询返回单条记录(string)
-        /// </summary>
+        /// <summary>查询返回单条记录(string)</summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>

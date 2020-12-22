@@ -10,14 +10,10 @@ using TplDemo.Common.Config;
 
 namespace TplDemo.CorsService
 {
-    /// <summary>
-    /// SqlSugar 启动服务
-    /// </summary>
+    /// <summary>SqlSugar 启动服务</summary>
     public static class SqlsugarSetup
     {
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="services"></param>
         public static void AddSqlsugarSetup(this IServiceCollection services)
         {
@@ -35,29 +31,29 @@ namespace TplDemo.CorsService
                     throw new ArgumentNullException("请配置数据库连接");//
                 }
 
-                databaseConfig.ForEach(m =>
-                {
-                    listConfig.Add(new ConnectionConfig()
+                databaseConfig.Where(c => c.isclose == false).ToList().ForEach(m =>
                     {
-                        ConfigId = m.dbname,
-                        ConnectionString = m.dburl,
-                        DbType = (DbType)m.dbtype,
-                        IsAutoCloseConnection = true,
-                        IsShardSameThread = false,
-                        AopEvents = new AopEvents
+                        listConfig.Add(new ConnectionConfig()
                         {
-                            OnLogExecuting = (sql, p) =>
+                            ConfigId = m.dbname,
+                            ConnectionString = m.dburl,
+                            DbType = (DbType)m.dbtype,
+                            IsAutoCloseConnection = true,
+                            IsShardSameThread = false,
+                            AopEvents = new AopEvents
                             {
-                                // SQL语句日志
+                                OnLogExecuting = (sql, p) =>
+                                {
+                                    // SQL语句日志
+                                }
+                            },
+                            MoreSettings = new ConnMoreSettings()
+                            {
+                                IsAutoRemoveDataCache = true
                             }
-                        },
-                        MoreSettings = new ConnMoreSettings()
-                        {
-                            IsAutoRemoveDataCache = true
                         }
-                    }
-                   );
-                });
+                       );
+                    });
                 return new SqlSugarClient(listConfig);
             });
         }

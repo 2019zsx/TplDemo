@@ -42,9 +42,7 @@ namespace TplDemo
 
         public IConfiguration Configuration { get; }
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
@@ -110,6 +108,8 @@ namespace TplDemo
             services.AddSqlsugarSetup();
 
             #endregion 数据库连接服务注入
+
+
 
             #region 注册http上下文访问器
 

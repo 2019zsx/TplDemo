@@ -24,7 +24,6 @@ namespace TplDemo.Services
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
@@ -66,10 +65,8 @@ namespace TplDemo.Services
                                            //icon = child.Icon,
                                            icon = "dashboard",
                                            title = child.Name
-                                           // requireAuth = true,
-                                           //  title = child.Name,
-                                           //  NoTabPage = child.IsHide.ObjToBool(),
-                                           //  keepAlive = child.IskeepAlive.ObjToBool()
+                                           // requireAuth = true, title = child.Name, NoTabPage =
+                                           // child.IsHide.ObjToBool(), keepAlive = child.IskeepAlive.ObjToBool()
                                        }
                                    }).ToList();
 

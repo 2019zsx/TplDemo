@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TplDemo.Common", "TplDemo.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TplDemo.Repository", "TplDemo.Repository\TplDemo.Repository.csproj", "{6D04EFBA-3222-4E3C-98FB-1B8A44C19E4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TplDemo.IServices", "TplDemo.IServices\TplDemo.IServices.csproj", "{AA4804BC-1DA1-4E7F-B34F-46101E0A0867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TplDemo.IServices", "TplDemo.IServices\TplDemo.IServices.csproj", "{AA4804BC-1DA1-4E7F-B34F-46101E0A0867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TplDemo.Services", "TplDemo.Services\TplDemo.Services.csproj", "{B9B95F6B-8778-4500-A92A-67F5DD2D9ADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TplDemo.Services", "TplDemo.Services\TplDemo.Services.csproj", "{B9B95F6B-8778-4500-A92A-67F5DD2D9ADA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TplDemo.Extensions", "TplDemo.Extensions\TplDemo.Extensions.csproj", "{34B54A70-078C-42A0-B840-552BC4DB7AF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TplDemo.Extensions", "TplDemo.Extensions\TplDemo.Extensions.csproj", "{34B54A70-078C-42A0-B840-552BC4DB7AF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TplDemo.Model", "TplDemo.Model\TplDemo.Model.csproj", "{E01545EF-6617-4265-AA79-5412FF28DEB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TplDemo.Model", "TplDemo.Model\TplDemo.Model.csproj", "{E01545EF-6617-4265-AA79-5412FF28DEB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
