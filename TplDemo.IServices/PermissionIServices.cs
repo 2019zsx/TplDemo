@@ -9,17 +9,13 @@ namespace TplDemo.IServices
 {
     public interface PermissionIServices : BASE.IBaseServices<Permission>
     {
-        /// <summary>
-        /// 根据角色获取对应的权限Id
-        /// </summary>
+        /// <summary>根据角色获取对应的权限Id</summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
 
-        Task<List<RoleModulePermission>> GetRoleModulePermission(int roleid);
+        Task<List<RolePermissions>> GetRoleModulePermission(int roleid);
 
-        /// <summary>
-        ///  获取路由数据
-        /// </summary>
+        /// <summary>获取路由数据</summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
         Task<List<ViewMenuTree>> GetMenuTree(int roleid);

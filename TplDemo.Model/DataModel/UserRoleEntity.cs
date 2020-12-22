@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Linq;
 using System.Text;
 
@@ -7,9 +8,10 @@ namespace TplDemo.Model.DataModel
     ///<summary>
     ///用户角色关系表
     ///</summary>
-    public partial class UserRoles
+    [SugarTable("UserRoles")]
+    public partial class UserRoleEntity
     {
-        public UserRoles()
+        public UserRoleEntity()
         {
         }
 

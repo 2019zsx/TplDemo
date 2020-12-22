@@ -20,28 +20,20 @@ using TplDemo.Common.TokenModel;
 
 namespace TplDemo.Controllers
 {
-    /// <summary>
-    /// 用户登录信息
-    /// </summary>
+    /// <summary>用户登录信息</summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        /// <summary>
-        /// 获取用户信息
-        /// </summary>
+        /// <summary>获取用户信息</summary>
         private sysUserInfoIServices dbsysUserInfoIServices;
 
-        /// <summary>
-        /// 获取角色信息
-        /// </summary>
+        /// <summary>获取角色信息</summary>
         private RoleIServices dbRoleIServices;
 
         private IUser dbUse;
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="_dbsysUserInfoIServices"></param>
         /// <param name="_dbRoleIServices"></param>
         public AccountController(sysUserInfoIServices _dbsysUserInfoIServices, RoleIServices _dbRoleIServices, IUser _dbUse)
@@ -51,9 +43,7 @@ namespace TplDemo.Controllers
             dbUse = _dbUse;
         }
 
-        /// <summary>
-        /// 系统登录
-        /// </summary>
+        /// <summary>系统登录</summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
@@ -77,7 +67,7 @@ namespace TplDemo.Controllers
             }
 
             string pdw = MD5Helper.MD5Encrypt32(model.updw);
-            var userdata = await dbsysUserInfoIServices.Query(c => c.tdIsDelete == false && c.uLoginName == model.uloginname && c.uLoginPWD == pdw);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.IsDelete == false && c.LoginName == model.uloginname && c.Password == pdw);
             if (userdata.Count == 0)
             {
                 pageModel.success = false;
@@ -86,20 +76,18 @@ namespace TplDemo.Controllers
             }
             var usermodel = userdata.FirstOrDefault();
             // 判断当前的选择的角色此用户是否存在
-            var isuserrole = await dbRoleIServices.Isuserrole(model.roleid, usermodel.uID);
+            var isuserrole = await dbRoleIServices.Isuserrole(model.roleid, usermodel.Id);
             if (!isuserrole)
             {
                 pageModel.success = false;
                 pageModel.msg = "当前选择的角色此用户不存在！";
                 return pageModel;
             }
-            pageModel.data = JwtHelper.GetToken(new Common.TokenModel.Userinfo() { roleid = model.roleid, uid = usermodel.uID, username = usermodel.uLoginName }, "web");
+            pageModel.data = JwtHelper.GetToken(new Common.TokenModel.Userinfo() { roleid = model.roleid, uid = usermodel.Id, username = usermodel.UserName }, "web");
             return pageModel;
         }
 
-        /// <summary>
-        /// 获取角色信息
-        /// </summary>
+        /// <summary>获取角色信息</summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
@@ -123,7 +111,7 @@ namespace TplDemo.Controllers
             }
 
             string pdw = MD5Helper.MD5Encrypt32(model.updw);
-            var userdata = await dbsysUserInfoIServices.Query(c => c.tdIsDelete == false && c.uLoginName == model.uloginname && c.uLoginPWD == pdw);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.IsDelete == false && c.LoginName == model.uloginname && c.Password == pdw);
             if (userdata.Count == 0)
             {
                 pageModel.success = false;
@@ -132,17 +120,15 @@ namespace TplDemo.Controllers
             }
             var usermodel = userdata.FirstOrDefault();
             // 获取当前用户对应的角色信息
-            var userroledata = await dbRoleIServices.GetdbUserRole(usermodel.uID);
-            int[] roleidarr = userroledata.Select(c => c.RoleId).ToArray();
-            Expression<Func<RoleEntity, VIewLoginRolelist>> selectexp = it => new VIewLoginRolelist() { roleid = it.Id, rolename = it.Name };
-            var roeldata = await dbRoleIServices.Query(c => roleidarr.Contains(c.Id), selectexp, "");
+            var userroledata = await dbRoleIServices.GetdbUserRole(usermodel.Id);
+            int[] roleidarr = userroledata.Select(c => c.Id).ToArray();
+            Expression<Func<RoleEntity, VIewLoginRolelist>> selectexp = it => new VIewLoginRolelist() { roleid = it.ID, rolename = it.RoleName };
+            var roeldata = await dbRoleIServices.Query(c => roleidarr.Contains(c.ID), selectexp, "");
             pageModel.data = roeldata;
             return pageModel;
         }
 
-        /// <summary>
-        /// 获取用户信息
-        /// </summary>
+        /// <summary>获取用户信息</summary>
         /// <returns></returns>
         [HttpGet]
         [Route("GetUserinfo")]
@@ -160,13 +146,11 @@ namespace TplDemo.Controllers
                 return pageModel;
             }
             string rolename = await dbRoleIServices.Getrolename(dbUse.role);
-            pageModel.data = new ViewUserinfo() { uid = usermodel.uID, username = usermodel.uRealName, roleid = dbUse.role, rolename = rolename };
+            pageModel.data = new ViewUserinfo() { uid = usermodel.Id, username = usermodel.UserName, roleid = dbUse.role, rolename = rolename };
             return pageModel;
         }
 
-        /// <summary>
-        /// 刷新token
-        /// </summary>
+        /// <summary>刷新token</summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
@@ -202,7 +186,7 @@ namespace TplDemo.Controllers
                 pageModel.msg = "（验证）token无效";
                 return pageModel;
             }
-            var userdata = await dbsysUserInfoIServices.Query(c => c.tdIsDelete == false && c.uID == userinfo.uid);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.IsDelete == false && c.Id == userinfo.uid);
 
             if (userdata == null)
             {

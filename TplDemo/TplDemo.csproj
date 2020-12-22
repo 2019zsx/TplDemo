@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\DefaultController.cs" />
+    <Compile Remove="Controllers\PermissionController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
   </ItemGroup>
 

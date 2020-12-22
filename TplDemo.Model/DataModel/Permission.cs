@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace TplDemo.Model.DataModel
     ///<summary>
     ///
     ///</summary>
+    [SugarTable("Permission")]
     public partial class Permission
     {
         public Permission()
@@ -32,12 +34,12 @@ namespace TplDemo.Model.DataModel
         public string Icon { get; set; }
 
         /// <summary>是否按钮</summary>
-        public string IsButton { get; set; }
+        public bool IsButton { get; set; }
 
         /// <summary>标题</summary>
         public string Title { get; set; }
 
         /// <summary>是否启用</summary>
-        public string isEnable { get; set; }
+        public bool isEnable { get; set; }
     }
 }

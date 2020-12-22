@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using SqlSugar;
 
 namespace TplDemo.Model.DataModel
 {
     ///<summary>
     ///
     ///</summary>
-    public partial class Users
+    [SugarTable("Users")]
+    public partial class sysUserInfoEntity
     {
         /// <summary></summary>
         public int Id { get; set; }
@@ -32,5 +34,7 @@ namespace TplDemo.Model.DataModel
 
         /// <summary>e</summary>
         public string Email { get; set; }
+
+        public bool IsDelete { get; set; }
     }
 }

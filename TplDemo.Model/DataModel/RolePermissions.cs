@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace TplDemo.Model.DataModel
     ///<summary>
     ///
     ///</summary>
+    [SugarTable("RolePermissions")]
     public partial class RolePermissions
     {
         public RolePermissions()
@@ -22,5 +24,7 @@ namespace TplDemo.Model.DataModel
 
         /// <summary>权限ID</summary>
         public int PermissionID { get; set; }
+
+        public bool? IsDeleted { get; set; }
     }
 }

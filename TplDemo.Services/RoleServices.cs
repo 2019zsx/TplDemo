@@ -22,30 +22,26 @@ namespace TplDemo.Services
 
         public async Task<bool> Isuserrole(int roleid, int uid)
         {
-            var userroledata = await dbUserRole.Query(c => c.RoleId == roleid && c.UserId == uid);
+            var userroledata = await dbUserRole.Query(c => c.RoleID == roleid && c.UserID == uid);
 
             return userroledata.Count == 0 ? false : true;
         }
 
-        /// <summary>
-        /// 获取当前用户当前所有角色
-        /// </summary>
+        /// <summary>获取当前用户当前所有角色</summary>
         /// <param name="roleId"></param>
         /// <param name="uid"></param>
         /// <returns></returns>
         public async Task<List<UserRoleEntity>> GetdbUserRole(int uid)
         {
-            return await dbUserRole.Query(c => c.UserId == uid);
+            return await dbUserRole.Query(c => c.UserID == uid);
         }
 
-        /// <summary>
-        /// 获取角色名称
-        /// </summary>
+        /// <summary>获取角色名称</summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
         public Task<string> Getrolename(int roleid)
         {
-            return dal.GetString("select name from role where id=@roleid", new { roleid = roleid });
+            return dal.GetString("select name from Roles where id=@roleid", new { roleid = roleid });
         }
     }
 }

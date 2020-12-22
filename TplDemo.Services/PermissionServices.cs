@@ -14,50 +14,47 @@ namespace TplDemo.Services
     public class PermissionServices : BASE.BaseServices<Permission>, PermissionIServices
     {
         private IBaseRepository<Permission> dal;
-        private IBaseRepository<RoleModulePermission> dalRoleModulePermission;
+        private IBaseRepository<RolePermissions> dalRoleModulePermission;
 
-        public PermissionServices(IBaseRepository<Permission> _dal, IBaseRepository<RoleModulePermission> _dalRoleModulePermission)
+        public PermissionServices(IBaseRepository<Permission> _dal, IBaseRepository<RolePermissions> _dalRoleModulePermission)
         {
             dal = _dal;
             base.BaseDal = dal;
             dalRoleModulePermission = _dalRoleModulePermission;
         }
 
-        /// <summary>
-        /// </summary>
+        /// <summary></summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        public async Task<List<RoleModulePermission>> GetRoleModulePermission(int roleid)
+        public async Task<List<RolePermissions>> GetRoleModulePermission(int roleid)
         {
-            return await dalRoleModulePermission.Query(c => c.RoleId == roleid && c.IsDeleted == false);
+            return await dalRoleModulePermission.Query(c => c.RoleID == roleid && c.IsDeleted == false);
         }
 
-        /// <summary>
-        /// 获取导航栏
-        /// </summary>
+        /// <summary>获取导航栏</summary>
         /// <param name="roleid">角色名称</param>
         /// <returns></returns>
         public async Task<List<ViewMenuTree>> GetMenuTree(int roleid)
         {
             var rmpdata = await GetRoleModulePermission(roleid);
-            int[] rmparrid = rmpdata.Select(c => c.PermissionId.ObjToInt()).ToArray();
-            var Permissionlist = await dal.Query(c => rmparrid.Contains(c.Id) && c.IsButton == false && c.Enabled == false && c.IsDeleted == false);
+            int[] rmparrid = rmpdata.Select(c => c.PermissionID.ObjToInt()).ToArray();
+            var Permissionlist = await dal.Query(c => rmparrid.Contains(c.ID));
 
             var permissionTrees = (from child in Permissionlist
-                                   where child.IsDeleted == false
-                                   orderby child.Id
+
+                                   orderby child.ID
                                    select new ViewMenuTree
                                    {
-                                       id = child.Id,
+                                       id = child.ID,
                                        name = child.Name,
-                                       pid = child.Pid,
-                                       order = child.OrderSort,
-                                       path = child.Code,
+                                       pid = child.ParentID.ObjToInt(),
+                                       order = child.orderID.ObjToInt(),
+                                       path = child.Path,
                                        iconCls = child.Icon,
 
-                                       component = child.Code,
+                                       component = child.Path,
                                        //Func = child.Func,
-                                       hidden = child.IsHide.ObjToBool(),
+                                       hidden = child.IsButton.ObjToBool(),
                                        //IsButton = child.IsButton.ObjToBool(),
                                        meta = new meta
                                        {
