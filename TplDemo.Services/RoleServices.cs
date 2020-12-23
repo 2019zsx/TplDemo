@@ -41,7 +41,7 @@ namespace TplDemo.Services
         /// <returns></returns>
         public Task<string> Getrolename(int roleid)
         {
-            return dal.GetString("select name from Roles where id=@roleid", new { roleid = roleid });
+            return dal.GetString("select RoleName from Roles where id=@roleid", new { roleid = roleid });
         }
     }
 }

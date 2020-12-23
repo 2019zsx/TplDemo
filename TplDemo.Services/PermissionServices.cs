@@ -39,67 +39,69 @@ namespace TplDemo.Services
             var rmpdata = await GetRoleModulePermission(roleid);
             int[] rmparrid = rmpdata.Select(c => c.PermissionID.ObjToInt()).ToArray();
             var Permissionlist = await dal.Query(c => rmparrid.Contains(c.ID));
-
-            var permissionTrees = (from child in Permissionlist
-
-                                   orderby child.ID
-                                   select new ViewMenuTree
-                                   {
-                                       id = child.ID,
-                                       name = child.Name,
-                                       pid = child.ParentID.ObjToInt(),
-                                       order = child.orderID.ObjToInt(),
-                                       path = child.Path,
-                                       iconCls = child.Icon,
-
-                                       component = child.Path,
-                                       //Func = child.Func,
-                                       hidden = child.IsButton.ObjToBool(),
-                                       //IsButton = child.IsButton.ObjToBool(),
-                                       meta = new meta
-                                       {
-                                           affix = true,
-                                           //icon = child.Icon,
-                                           icon = "dashboard",
-                                           title = child.Name
-                                           // requireAuth = true, title = child.Name, NoTabPage =
-                                           // child.IsHide.ObjToBool(), keepAlive = child.IskeepAlive.ObjToBool()
-                                       }
-                                   }).ToList();
-
-            ViewMenuTree rootRoot = new ViewMenuTree()
+            var MenuTreedata = Permissionlist.Where(c => c.ParentID == 0).ToList();
+            List<ViewMenuTree> permissionTrees = new List<ViewMenuTree>();
+            foreach (var child in MenuTreedata)
             {
-                id = 0,
-                pid = 0,
-                order = 0,
-                name = "根节点",
-                path = "",
-                iconCls = "",
-                meta = new meta(),
-            };
-            permissionTrees = permissionTrees.OrderBy(d => d.order).ToList();
-            LoopNaviBarAppendChildren(permissionTrees, rootRoot);
+                ViewMenuTree menuTree = new ViewMenuTree();
+
+                menuTree.id = child.ID;
+                menuTree.name = child.Name;
+                menuTree.pid = child.ParentID.ObjToInt();
+                menuTree.order = child.orderID.ObjToInt();
+                menuTree.path = child.Path;
+                menuTree.iconCls = child.Icon;
+                menuTree.component = child.Path;
+                //Func = child.Func,
+                menuTree.hidden = child.IsButton.ObjToBool();
+                menuTree.meta = new meta
+                {
+                    affix = true,
+                    //icon = child.Icon,
+                    icon = "dashboard",
+                    title = child.Title
+                    // requireAuth = true, title = child.Name, NoTabPage = child.IsHide.ObjToBool(),
+                    // keepAlive = child.IskeepAlive.ObjToBool()
+                };
+                menuTree.children = GetMenuTreeChildren(Permissionlist, child.ID);
+                permissionTrees.Add(menuTree);
+            }
+
             return permissionTrees;
         }
 
-        public static void LoopNaviBarAppendChildren(List<ViewMenuTree> all, ViewMenuTree curItem)
+        /// <summary>获取菜单树</summary>
+        /// <param name="id">顶级ID</param>
+        /// <returns></returns>
+        public List<ViewMenuTree> GetMenuTreeChildren(List<Permission> all, int ParentID)
         {
-            var subItems = all.Where(ee => ee.pid == curItem.id).ToList();
+            List<ViewMenuTree> data = new List<ViewMenuTree>();
 
-            if (subItems.Count > 0)
+            var MenuTreedata = all.Where(ee => ee.ParentID == ParentID).ToList(); ;
+            foreach (var child in MenuTreedata)
             {
-                curItem.children = new List<ViewMenuTree>();
-                curItem.children.AddRange(subItems);
-            }
-            else
-            {
-                curItem.children = null;
+                ViewMenuTree menuTree = new ViewMenuTree();
+
+                menuTree.id = child.ID;
+                menuTree.name = child.Name;
+                menuTree.pid = child.ParentID.ObjToInt();
+                menuTree.order = child.orderID.ObjToInt();
+                menuTree.path = child.Path;
+                menuTree.iconCls = child.Icon;
+                menuTree.component = child.Path;
+                //Func = child.Func,
+                menuTree.hidden = child.IsButton.ObjToBool();
+                //IsButton = child.IsButton.ObjToBool(),
+                menuTree.meta = new meta
+                {
+                    affix = true,
+                    icon = "dashboard",
+                    title = child.Title
+                };
+                data.Add(menuTree);
             }
 
-            foreach (var subItem in subItems)
-            {
-                LoopNaviBarAppendChildren(all, subItem);
-            }
+            return data;
         }
     }
 }

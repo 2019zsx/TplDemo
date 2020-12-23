@@ -16,5 +16,9 @@ namespace TplDemo.Model.DataModel
 
         /// <summary>角色Id</summary>
         public string RoleName { get; set; }
+
+        /// <summary>是否启用</summary>
+
+        public bool IsDeleted { get; set; }
     }
 }
