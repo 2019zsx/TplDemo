@@ -228,7 +228,7 @@ namespace TplDemo.Repository.BASE
 
         public async Task<List<TResult>> Query<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, string strOrderByFileds)
         {
-            return _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).Select<TResult>(selectExpression).ToList();
+            return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).Select<TResult>(selectExpression).ToListAsync();
         }
 
         /// <summary>功能描述:查询数据列表</summary>
@@ -437,6 +437,59 @@ namespace TplDemo.Repository.BASE
         public async Task<string> GetString(string sql, object parameters)
         {
             return await _db.Ado.GetStringAsync(sql, parameters);
+        }
+
+        public async Task<List<TResult>> GetQuerylistTResult<TResult>(string sql, object parameters = null)
+        {
+            return await _db.Ado.SqlQueryAsync<TResult>(sql, parameters);
+        }
+
+        public async Task<List<TResult>> QueryMuchtwo<T, T2, TResult>(
+         Expression<Func<T, T2, object[]>> joinExpression,
+         Expression<Func<T, T2, TResult>> selectExpression,
+         Expression<Func<T, T2, bool>> whereLambda = null) where T : class, new()
+        {
+            if (whereLambda == null)
+            {
+                return await _db.Queryable(joinExpression).Select(selectExpression).ToListAsync();
+            }
+            return await _db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
+        }
+
+        /// <summary>
+        ///实体转换
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="whereExpression"></param>
+        /// <param name="selectExpression"></param>
+        /// <returns></returns>
+
+        public async Task<List<TResult>> Query<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, string strOrderByFileds, int top)
+        {
+            return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).Take(top).Select<TResult>(selectExpression).ToListAsync();
+        }
+
+        public async Task<PageModel<List<TResult>>> GetQueryablePage<T, T2, TResult>(
+              Expression<Func<T, T2, object[]>> joinExpression,
+              Expression<Func<T, T2, TResult>> selectExpression,
+              Expression<Func<T, T2, bool>> whereLambda = null, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null) where T : class, new()
+        {
+            RefAsync<int> totalCount = 0;
+            var list = await _db.Queryable(joinExpression).WhereIF(whereLambda != null, whereLambda).Select(selectExpression).OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).ToPageListAsync(intPageIndex, intPageSize, totalCount);
+            return new PageModel<List<TResult>> { count = totalCount, data = list, state = 10001, msg = "获取成功" };
+        }
+
+        public async Task<PageModel<List<TResult>>> QueryPageTResult<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null)
+        {
+            RefAsync<int> totalCount = 0;
+            var list = await _db.Queryable<TEntity>()
+             .OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds)
+             .WhereIF(whereExpression != null, whereExpression).Select<TResult>(selectExpression)
+             .ToPageListAsync(intPageIndex, intPageSize, totalCount);
+
+            int pageCount = (Math.Ceiling(totalCount.ObjToDecimal() / intPageSize.ObjToDecimal())).ObjToInt();
+            return new PageModel<List<TResult>>() { count = totalCount, data = list };
         }
     }
 }

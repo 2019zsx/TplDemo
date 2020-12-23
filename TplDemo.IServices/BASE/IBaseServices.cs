@@ -70,38 +70,46 @@ namespace TplDemo.IServices.BASE
             Expression<Func<T, T2, T3, TResult>> selectExpression,
             Expression<Func<T, T2, T3, bool>> whereLambda = null) where T : class, new();
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
         Task<DateTime> GetDateTime(string sql, object parameters);
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
 
         Task<dynamic> GetDecimal(string sql, object parameters);
 
-        /// <summary>
-        /// 查询返回单条记录(int)
-        /// </summary>
+        /// <summary>查询返回单条记录(int)</summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
         Task<int> GetInt(string sql, object parameters);
 
         //以下为返回string
-        /// <summary>
-        /// 查询返回单条记录(string)
-        /// </summary>
+        /// <summary>查询返回单条记录(string)</summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
         Task<string> GetString(string sql, object parameters);
+
+        Task<List<TResult>> GetQuerylistTResult<TResult>(string sql, object parameters = null);
+
+        Task<List<TResult>> QueryMuchtwo<T, T2, TResult>(
+         Expression<Func<T, T2, object[]>> joinExpression,
+         Expression<Func<T, T2, TResult>> selectExpression,
+         Expression<Func<T, T2, bool>> whereLambda = null) where T : class, new();
+
+        Task<List<TResult>> Query<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, string strOrderByFileds, int top);
+
+        Task<PageModel<List<TResult>>> GetQueryablePage<T, T2, TResult>(
+           Expression<Func<T, T2, object[]>> joinExpression,
+           Expression<Func<T, T2, TResult>> selectExpression,
+           Expression<Func<T, T2, bool>> whereLambda = null, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null) where T : class, new();
+
+        Task<PageModel<List<TResult>>> QueryPageTResult<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null);
     }
 }
