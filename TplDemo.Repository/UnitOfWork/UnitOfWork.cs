@@ -14,14 +14,35 @@ namespace TplDemo.Repository.UnitOfWork
             _sqlSugarClient = sqlSugarClient;
         }
 
-        /// <summary>
-        /// 获取DB，保证唯一性
-        /// </summary>
+        /// <summary>获取DB，保证唯一性</summary>
         /// <returns></returns>
         public SqlSugarClient GetDbClient()
         {
             // 必须要as，后边会用到切换数据库操作
             return _sqlSugarClient as SqlSugarClient;
+        }
+
+        public void BeginTranReadUncommitted()
+        {
+            GetDbClient().Ado.BeginTran(System.Data.IsolationLevel.ReadUncommitted);
+        }
+
+        public void CommitTranUncommitted()
+        {
+            try
+            {
+                GetDbClient().Ado.CommitTran(); //
+            }
+            catch (Exception ex)
+            {
+                GetDbClient().Ado.RollbackTran();
+                throw ex;
+            }
+        }
+
+        public void RollbackTranUncommitted()
+        {
+            GetDbClient().RollbackTran();
         }
 
         public void BeginTran()

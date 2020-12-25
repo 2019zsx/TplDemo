@@ -9,6 +9,7 @@ using TplDemo.IServices;
 using TplDemo.Model.DataModel;
 using TplDemo.Model.ViewModel;
 using TplDemo.Repository.BASE;
+using TplDemo.Repository.UnitOfWork;
 
 namespace TplDemo.Services
 {
@@ -16,15 +17,16 @@ namespace TplDemo.Services
     {
         public IBaseRepository<sysUserInfoEntity> dal;
 
-        public sysUserInfoServices(IBaseRepository<sysUserInfoEntity> _dal)
+        public IUnitOfWork unitOfWork;
+
+        public sysUserInfoServices(IUnitOfWork _unitOfWork, IBaseRepository<sysUserInfoEntity> _dal)
         {
             dal = _dal;
             base.BaseDal = dal;
+            unitOfWork = _unitOfWork;
         }
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <returns></returns>
         public async Task<sysUserInfoEntity> Verificationlogin(ViewLogin model)
         {

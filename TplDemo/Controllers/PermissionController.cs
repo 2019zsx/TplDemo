@@ -12,9 +12,7 @@ using TplDemo.Model.ViewModel;
 
 namespace TplDemo.Controllers
 {
-    /// <summary>
-    /// 权限管理
-    /// </summary>
+    /// <summary>权限管理</summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PermissionController : ControllerBase
@@ -22,9 +20,7 @@ namespace TplDemo.Controllers
         private IUser user;
         private PermissionIServices dbpermissionIServices;
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="_user"></param>
         /// <param name="_dbpermissionIServices"></param>
         public PermissionController(IUser _user, PermissionIServices _dbpermissionIServices)
@@ -33,9 +29,7 @@ namespace TplDemo.Controllers
             dbpermissionIServices = _dbpermissionIServices;
         }
 
-        /// <summary>
-        /// 获取菜单
-        /// </summary>
+        /// <summary>获取菜单</summary>
         /// <returns></returns>
 
         [HttpGet]
@@ -43,7 +37,6 @@ namespace TplDemo.Controllers
         [Authorize]
         public async Task<PageModel<List<ViewMenuTree>>> GetMenuTree()
         {
-            //   Task<List<ViewMenuTree>> GetMenuTree(int roleid)
             var data = await dbpermissionIServices.GetMenuTree(user.role);
             data = data.OrderBy(c => c.id).ToList();
             return new PageModel<List<ViewMenuTree>>() { data = data };

@@ -36,6 +36,7 @@ namespace TplDemo.Controllers
         /// <summary></summary>
         /// <param name="_dbsysUserInfoIServices"></param>
         /// <param name="_dbRoleIServices"></param>
+        /// <param name="_dbUse"></param>
         public AccountController(sysUserInfoIServices _dbsysUserInfoIServices, RoleIServices _dbRoleIServices, IUser _dbUse)
         {
             dbsysUserInfoIServices = _dbsysUserInfoIServices;
@@ -48,7 +49,7 @@ namespace TplDemo.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("SystemLogin")]
-        public async Task<PageModel<ViewToken>> SystemLogin([FromBody] ViewLogin model)
+        public async Task<PageModel<ViewToken>> SystemLogin(ViewLogin model)
         {
             var pageModel = new PageModel<ViewToken>();
             if (model.uloginname.IsNullOrEmpty())
@@ -92,7 +93,7 @@ namespace TplDemo.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("GetLoginRole")]
-        public async Task<PageModel<List<VIewLoginRolelist>>> GetLoginRole([FromBody] ViewLoginRole model)
+        public async Task<PageModel<List<VIewLoginRolelist>>> GetLoginRole(ViewLoginRole model)
         {
             var pageModel = new PageModel<List<VIewLoginRolelist>>();
             if (model.uloginname.IsNullOrEmpty())
@@ -131,7 +132,6 @@ namespace TplDemo.Controllers
         /// <summary>获取用户信息</summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetUserinfo")]
         [Authorize]
         public async Task<PageModel<ViewUserinfo>> GetUserinfo()
         {
@@ -146,7 +146,13 @@ namespace TplDemo.Controllers
                 return pageModel;
             }
             string rolename = await dbRoleIServices.Getrolename(dbUse.role);
-            pageModel.data = new ViewUserinfo() { uid = usermodel.Id, username = usermodel.UserName, roleid = dbUse.role, rolename = rolename };
+            pageModel.data = new ViewUserinfo()
+            {
+                uid = usermodel.Id,
+                username = usermodel.UserName,
+                roleid = dbUse.role,
+                rolename = rolename
+            };
             return pageModel;
         }
 
@@ -154,7 +160,6 @@ namespace TplDemo.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("Getrefreshtoken")]
         public async Task<PageModel<ViewToken>> Getrefreshtoken(Viewtrefreshtoken model)
         {
             var pageModel = new PageModel<ViewToken>() { };

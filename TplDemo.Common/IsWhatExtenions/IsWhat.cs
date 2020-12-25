@@ -6,14 +6,10 @@ using System.Text.RegularExpressions;
 
 namespace TplDemo.Common.IsWhatExtenions
 {
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     public static class IsWhat
     {
-        /// <summary>
-        /// 值在的范围？
-        /// </summary>
+        /// <summary>值在的范围？</summary>
         /// <param name="thisValue"></param>
         /// <param name="begin">大于等于begin</param>
         /// <param name="end">小于等于end</param>
@@ -23,9 +19,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return thisValue >= begin && thisValue <= end;
         }
 
-        /// <summary>
-        /// 值在的范围？
-        /// </summary>
+        /// <summary>值在的范围？</summary>
         /// <param name="thisValue"></param>
         /// <param name="begin">大于等于begin</param>
         /// <param name="end">小于等于end</param>
@@ -35,9 +29,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return thisValue >= begin && thisValue <= end;
         }
 
-        /// <summary>
-        /// 在里面吗?
-        /// </summary>
+        /// <summary>在里面吗?</summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="thisValue"></param>
         /// <param name="values"></param>
@@ -47,9 +39,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return values.Contains(thisValue);
         }
 
-        /// <summary>
-        /// 在里面吗?
-        /// </summary>
+        /// <summary>在里面吗?</summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="thisValue"></param>
         /// <param name="values"></param>
@@ -59,9 +49,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return inValues.Any(it => thisValue.Contains(it));
         }
 
-        /// <summary>
-        /// 是null或""?
-        /// </summary>
+        /// <summary>是null或""?</summary>
         /// <returns></returns>
         public static bool IsNullOrEmpty(this object thisValue)
         {
@@ -69,9 +57,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return thisValue.ToString() == "";
         }
 
-        /// <summary>
-        /// 是null或""?
-        /// </summary>
+        /// <summary>是null或""?</summary>
         /// <returns></returns>
         public static bool IsNullOrEmpty(this Guid? thisValue)
         {
@@ -79,9 +65,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return thisValue == Guid.Empty;
         }
 
-        /// <summary>
-        /// 是null或""?
-        /// </summary>
+        /// <summary>是null或""?</summary>
         /// <returns></returns>
         public static bool IsNullOrEmpty(this Guid thisValue)
         {
@@ -89,9 +73,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return thisValue == Guid.Empty;
         }
 
-        /// <summary>
-        /// 有值?(与IsNullOrEmpty相反)
-        /// </summary>
+        /// <summary>有值?(与IsNullOrEmpty相反)</summary>
         /// <returns></returns>
         public static bool IsValuable(this object thisValue)
         {
@@ -99,9 +81,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return thisValue.ToString() != "";
         }
 
-        /// <summary>
-        /// 有值?(与IsNullOrEmpty相反)
-        /// </summary>
+        /// <summary>有值?(与IsNullOrEmpty相反)</summary>
         /// <returns></returns>
         public static bool IsValuable(this IEnumerable<object> thisValue)
         {
@@ -109,9 +89,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return true;
         }
 
-        /// <summary>
-        /// 是零?
-        /// </summary>
+        /// <summary>是零?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsZero(this object thisValue)
@@ -119,9 +97,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return (thisValue == null || thisValue.ToString() == "0");
         }
 
-        /// <summary>
-        /// 是INT?
-        /// </summary>
+        /// <summary>是INT?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsInt(this object thisValue)
@@ -130,9 +106,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return Regex.IsMatch(thisValue.ToString(), @"^\d+$");
         }
 
-        /// <summary>
-        /// 不是INT?
-        /// </summary>
+        /// <summary>不是INT?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsNoInt(this object thisValue)
@@ -141,9 +115,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return !Regex.IsMatch(thisValue.ToString(), @"^\d+$");
         }
 
-        /// <summary>
-        /// 是金钱?
-        /// </summary>
+        /// <summary>是金钱?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsMoney(this object thisValue)
@@ -153,9 +125,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return double.TryParse(thisValue.ToString(), out outValue);
         }
 
-        /// <summary>
-        /// 是时间?
-        /// </summary>
+        /// <summary>是时间?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsDate(this object thisValue)
@@ -165,9 +135,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return DateTime.TryParse(thisValue.ToString(), out outValue);
         }
 
-        /// <summary>
-        /// 是邮箱?
-        /// </summary>
+        /// <summary>是邮箱?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsEamil(this object thisValue)
@@ -176,9 +144,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return Regex.IsMatch(thisValue.ToString(), @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$");
         }
 
-        /// <summary>
-        /// 是手机?
-        /// </summary>
+        /// <summary>是手机?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsMobile(this object thisValue)
@@ -187,18 +153,14 @@ namespace TplDemo.Common.IsWhatExtenions
             return Regex.IsMatch(thisValue.ToString(), @"^\d{11}$");
         }
 
-        /// <summary>
-        /// 是座机?
-        /// </summary>
+        /// <summary>是座机?</summary>
         public static bool IsTelephone(this object thisValue)
         {
             if (thisValue == null) return false;
             return System.Text.RegularExpressions.Regex.IsMatch(thisValue.ToString(), @"^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8}$");
         }
 
-        /// <summary>
-        /// 是身份证?
-        /// </summary>
+        /// <summary>是身份证?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsIDcard(this object thisValue)
@@ -207,9 +169,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return System.Text.RegularExpressions.Regex.IsMatch(thisValue.ToString(), @"^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$");
         }
 
-        /// <summary>
-        /// 是传真?
-        /// </summary>
+        /// <summary>是传真?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsFax(this object thisValue)
@@ -232,9 +192,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return reg.IsMatch(thisValue.ToString());
         }
 
-        /// <summary>
-        /// 是true?
-        /// </summary>
+        /// <summary>是true?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsTrue(this object thisValue)
@@ -242,9 +200,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return Convert.ToBoolean(thisValue);
         }
 
-        /// <summary>
-        /// 是false?
-        /// </summary>
+        /// <summary>是false?</summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
         public static bool IsFalse(this object thisValue)
@@ -252,9 +208,7 @@ namespace TplDemo.Common.IsWhatExtenions
             return !Convert.ToBoolean(thisValue);
         }
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
 

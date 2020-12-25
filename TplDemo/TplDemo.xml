@@ -5,51 +5,35 @@
     </assembly>
     <members>
         <member name="T:TplDemo.Controllers.AccountController">
-            <summary>
-            用户登录信息
-            </summary>
+            <summary>用户登录信息</summary>
         </member>
         <member name="F:TplDemo.Controllers.AccountController.dbsysUserInfoIServices">
-            <summary>
-            获取用户信息
-            </summary>
+            <summary>获取用户信息</summary>
         </member>
         <member name="F:TplDemo.Controllers.AccountController.dbRoleIServices">
-            <summary>
-            获取角色信息
-            </summary>
+            <summary>获取角色信息</summary>
         </member>
         <member name="M:TplDemo.Controllers.AccountController.#ctor(TplDemo.IServices.sysUserInfoIServices,TplDemo.IServices.RoleIServices,TplDemo.Common.HttpContextUser.IUser)">
-             <summary>
-            
-             </summary>
-             <param name="_dbsysUserInfoIServices"></param>
-             <param name="_dbRoleIServices"></param>
+            <summary></summary>
+            <param name="_dbsysUserInfoIServices"></param>
+            <param name="_dbRoleIServices"></param>
         </member>
         <member name="M:TplDemo.Controllers.AccountController.SystemLogin(TplDemo.Model.ViewModel.ViewLogin)">
-            <summary>
-            系统登录
-            </summary>
+            <summary>系统登录</summary>
             <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:TplDemo.Controllers.AccountController.GetLoginRole(TplDemo.Model.ViewModel.ViewLoginRole)">
-            <summary>
-            获取角色信息
-            </summary>
+            <summary>获取角色信息</summary>
             <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:TplDemo.Controllers.AccountController.GetUserinfo">
-            <summary>
-            获取用户信息
-            </summary>
+            <summary>获取用户信息</summary>
             <returns></returns>
         </member>
         <member name="M:TplDemo.Controllers.AccountController.Getrefreshtoken(TplDemo.Model.ViewModel.Viewtrefreshtoken)">
-            <summary>
-            刷新token
-            </summary>
+            <summary>刷新token</summary>
             <param name="model"></param>
             <returns></returns>
         </member>
@@ -70,39 +54,42 @@
             <returns></returns>
         </member>
         <member name="T:TplDemo.Controllers.PermissionController">
-            <summary>
-            权限管理
-            </summary>
+            <summary>权限管理</summary>
         </member>
         <member name="M:TplDemo.Controllers.PermissionController.#ctor(TplDemo.Common.HttpContextUser.IUser,TplDemo.IServices.PermissionIServices)">
-             <summary>
-            
-             </summary>
-             <param name="_user"></param>
-             <param name="_dbpermissionIServices"></param>
+            <summary></summary>
+            <param name="_user"></param>
+            <param name="_dbpermissionIServices"></param>
         </member>
         <member name="M:TplDemo.Controllers.PermissionController.GetMenuTree">
-            <summary>
-            获取菜单
-            </summary>
+            <summary>获取菜单</summary>
+            <returns></returns>
+        </member>
+        <member name="T:TplDemo.Controllers.SysUserController">
+            <summary>用户信息</summary>
+        </member>
+        <member name="F:TplDemo.Controllers.SysUserController.dbsysUserInfoIServices">
+            <summary>获取用户信息</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.#ctor(TplDemo.IServices.sysUserInfoIServices)">
+            <summary></summary>
+            <param name="_dbsysUserInfoIServices"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.Create(TplDemo.Model.ViewModel.ViewCreateUser)">
+            <summary>创建用户</summary>
+            <param name="model"></param>
             <returns></returns>
         </member>
         <member name="T:TplDemo.CorsService.SqlsugarSetup">
-            <summary>
-            SqlSugar 启动服务
-            </summary>
+            <summary>SqlSugar 启动服务</summary>
         </member>
         <member name="M:TplDemo.CorsService.SqlsugarSetup.AddSqlsugarSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-             <summary>
-            
-             </summary>
-             <param name="services"></param>
+            <summary></summary>
+            <param name="services"></param>
         </member>
         <member name="M:TplDemo.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-             <summary>
-            
-             </summary>
-             <param name="services"></param>
+            <summary></summary>
+            <param name="services"></param>
         </member>
     </members>
 </doc>

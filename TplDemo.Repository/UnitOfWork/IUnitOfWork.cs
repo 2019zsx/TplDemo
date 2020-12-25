@@ -9,6 +9,12 @@ namespace TplDemo.Repository.UnitOfWork
     {
         SqlSugarClient GetDbClient();
 
+        void BeginTranReadUncommitted();
+
+        void CommitTranUncommitted();
+
+        void RollbackTranUncommitted();
+
         void BeginTran();
 
         void CommitTran();
