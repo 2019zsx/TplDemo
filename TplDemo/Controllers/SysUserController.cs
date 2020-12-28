@@ -14,6 +14,7 @@ using TplDemo.Common.HttpContextUser;
 using SqlSugar;
 using TplDemo.Repository.UnitOfWork;
 using TplDemo.Common.Helper;
+using AutoMapper;
 
 namespace TplDemo.Controllers
 {
@@ -30,23 +31,26 @@ namespace TplDemo.Controllers
         private UserRoleIServices userRoleIServices;
 
         private RoleIServices roleIServices;
+        private readonly IMapper mapper;
 
         /// <summary></summary>
         public IUnitOfWork unitOfWork;
 
         /// <summary></summary>
         /// <param name="_user"></param>
+        /// <param name="_mapper"></param>
         /// <param name="_unitOfWork"></param>
         /// <param name="_dbsysUserInfoIServices"></param>
         /// <param name="_roleIServices"></param>
         /// <param name="_userRoleIServices"></param>
-        public SysUserController(IUser _user, IUnitOfWork _unitOfWork, sysUserInfoIServices _dbsysUserInfoIServices, RoleIServices _roleIServices, UserRoleIServices _userRoleIServices)
+        public SysUserController(IUser _user, IMapper _mapper, IUnitOfWork _unitOfWork, sysUserInfoIServices _dbsysUserInfoIServices, RoleIServices _roleIServices, UserRoleIServices _userRoleIServices)
         {
             user = _user;
             dbsysUserInfoIServices = _dbsysUserInfoIServices;
             roleIServices = _roleIServices;
             userRoleIServices = _userRoleIServices;
             unitOfWork = _unitOfWork;
+            mapper = _mapper;
         }
 
         /// <summary>获取用户信息</summary>
@@ -90,6 +94,7 @@ namespace TplDemo.Controllers
         [HttpPost]
         public async Task<PageModel<object>> Create(ViewCreateUser model)
         {
+            var dto = mapper.Map<sysUserInfoEntity>(model);
             var pageModel = new PageModel<object>();
             if (model.LoginName.IsNullOrEmpty())
             {

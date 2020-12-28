@@ -83,9 +83,17 @@
         <member name="F:TplDemo.Controllers.SysUserController.dbsysUserInfoIServices">
             <summary>获取用户信息</summary>
         </member>
-        <member name="M:TplDemo.Controllers.SysUserController.#ctor(TplDemo.Common.HttpContextUser.IUser,TplDemo.IServices.sysUserInfoIServices,TplDemo.IServices.RoleIServices)">
+        <member name="F:TplDemo.Controllers.SysUserController.unitOfWork">
             <summary></summary>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.#ctor(TplDemo.Common.HttpContextUser.IUser,AutoMapper.IMapper,TplDemo.Repository.UnitOfWork.IUnitOfWork,TplDemo.IServices.sysUserInfoIServices,TplDemo.IServices.RoleIServices,TplDemo.IServices.UserRoleIServices)">
+            <summary></summary>
+            <param name="_user"></param>
+            <param name="_mapper"></param>
+            <param name="_unitOfWork"></param>
             <param name="_dbsysUserInfoIServices"></param>
+            <param name="_roleIServices"></param>
+            <param name="_userRoleIServices"></param>
         </member>
         <member name="M:TplDemo.Controllers.SysUserController.GetUserPage(System.Int32,System.Int32,System.String)">
             <summary>获取用户信息</summary>

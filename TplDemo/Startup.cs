@@ -18,7 +18,10 @@ using TplDemo.Common;
 using TplDemo.Common.Config;
 using TplDemo.Common.HttpContextUser;
 using TplDemo.CorsService;
+using TplDemo.Extensions;
 using TplDemo.Extensions.AutofacModule;
+using AutoMapper;
+using TplDemo.Extensions.Mapper;
 
 namespace TplDemo
 {
@@ -109,7 +112,11 @@ namespace TplDemo
 
             #endregion 数据库连接服务注入
 
+            #region AutoMapper 对应类型转换
 
+            services.AddAutoMapper(typeof(MapperProfiles).Assembly);
+
+            #endregion AutoMapper 对应类型转换
 
             #region 注册http上下文访问器
 
