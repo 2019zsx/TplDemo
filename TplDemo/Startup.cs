@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
 using TplDemo.Common;
 using TplDemo.Common.Config;
 using TplDemo.Common.HttpContextUser;
@@ -149,32 +148,31 @@ namespace TplDemo
             .PropertiesAutowired();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory LogManager)
+        /// <summary></summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="logger"></param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            #region 添加NLog
+            #region 添加日志
 
-            #region nuget =》 NLog.Extensions.Logging
+            log4net.LogManager.GetLogger("");
 
-            LogManager.ConfigureNLog("nlog.config");
+            logger.CreateLogger("");
+            logger.AddLog4Net();
 
-            // 添加NLog
-            LogManager.AddNLog();
-
-            #endregion nuget =》 NLog.Extensions.Logging
+            #endregion 添加日志
 
             #region 解决输出中文乱码问题（nuget =》System.Text.Encoding.CodePages）
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             #endregion 解决输出中文乱码问题（nuget =》System.Text.Encoding.CodePages）
-
-            #endregion 添加NLog
 
             app.UseRouting();
             //跨域添加

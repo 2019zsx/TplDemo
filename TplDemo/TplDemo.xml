@@ -39,19 +39,13 @@
             <returns></returns>
         </member>
         <member name="T:TplDemo.Controllers.Log1Controller">
-            <summary>
-             添加日志实例
-            </summary>
+            <summary>添加日志实例</summary>
         </member>
         <member name="M:TplDemo.Controllers.Log1Controller.#ctor(Microsoft.Extensions.Logging.ILogger{TplDemo.Controllers.Log1Controller})">
-             <summary>
-            
-             </summary>
+            <summary></summary>
         </member>
         <member name="M:TplDemo.Controllers.Log1Controller.Log">
-            <summary>
-            添加日志
-            </summary>
+            <summary>添加日志</summary>
             <returns></returns>
         </member>
         <member name="T:TplDemo.Controllers.PermissionController">
@@ -118,9 +112,20 @@
             <summary></summary>
             <param name="services"></param>
         </member>
+        <member name="M:TplDemo.Program.CreateHostBuilder(System.String[])">
+            <summary></summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
         <member name="M:TplDemo.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary></summary>
             <param name="services"></param>
+        </member>
+        <member name="M:TplDemo.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary></summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="logger"></param>
         </member>
     </members>
 </doc>

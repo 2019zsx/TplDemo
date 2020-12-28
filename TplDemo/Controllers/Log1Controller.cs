@@ -8,26 +8,20 @@ using Microsoft.Extensions.Logging;
 
 namespace TplDemo.Controllers
 {
-    /// <summary>
-    ///  添加日志实例
-    /// </summary>
+    /// <summary>添加日志实例</summary>
     [Route("api/[controller]")]
     [ApiController]
     public class Log1Controller : ControllerBase
     {
         private readonly ILogger<Log1Controller> logger;
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         public Log1Controller(ILogger<Log1Controller> _logger)
         {
             logger = _logger;
         }
 
-        /// <summary>
-        /// 添加日志
-        /// </summary>
+        /// <summary>添加日志</summary>
         /// <returns></returns>
         [HttpGet]
         public IActionResult Log()
