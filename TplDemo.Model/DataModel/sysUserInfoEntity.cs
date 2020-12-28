@@ -24,10 +24,10 @@ namespace TplDemo.Model.DataModel
         public string UserName { get; set; }
 
         /// <summary>性别 e</summary>
-        public bool? Sex { get; set; }
+        public int? Sex { get; set; }
 
-        /// <summary>出生日期 e</summary>
-        public DateTime? Birthday { get; set; }
+        /// <summary>年龄</summary>
+        public int Age { get; set; }
 
         /// <summary>手机号 e</summary>
         public string Phone { get; set; }
@@ -36,5 +36,14 @@ namespace TplDemo.Model.DataModel
         public string Email { get; set; }
 
         public bool IsDelete { get; set; }
+        /// <summary>角色名称</summary>
+
+        [SugarColumn(IsIgnore = true)]
+        public string roleName { get; set; }
+
+        /// <summary></summary>
+
+        [SugarColumn(IsIgnore = true)]
+        public int[] roleId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ using TplDemo.Model.ViewModel;
 namespace TplDemo.Controllers
 {
     /// <summary>权限管理</summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PermissionController : ControllerBase
     {
@@ -33,7 +33,6 @@ namespace TplDemo.Controllers
         /// <returns></returns>
 
         [HttpGet]
-        [Route("GetMenuTree")]
         [Authorize]
         public async Task<PageModel<List<ViewMenuTree>>> GetMenuTree()
         {

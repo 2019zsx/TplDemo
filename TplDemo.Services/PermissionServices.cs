@@ -51,7 +51,7 @@ namespace TplDemo.Services
                 menuTree.order = child.orderID.ObjToInt();
                 menuTree.path = child.Path;
                 menuTree.iconCls = child.Icon;
-                menuTree.component = child.Path;
+                menuTree.component = child.component;
                 //Func = child.Func,
                 menuTree.hidden = child.IsButton.ObjToBool();
                 menuTree.meta = new meta
@@ -88,7 +88,7 @@ namespace TplDemo.Services
                 menuTree.order = child.orderID.ObjToInt();
                 menuTree.path = child.Path;
                 menuTree.iconCls = child.Icon;
-                menuTree.component = child.Path;
+                menuTree.component = child.component;
                 //Func = child.Func,
                 menuTree.hidden = child.IsButton.ObjToBool();
                 //IsButton = child.IsButton.ObjToBool(),

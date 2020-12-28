@@ -17,10 +17,10 @@ namespace TplDemo.Model.ViewModel
         public string UserName { get; set; }
 
         /// <summary>性别 e</summary>
-        public bool? Sex { get; set; }
+        public int Sex { get; set; }
 
-        /// <summary>出生日期</summary>
-        public DateTime? Birthday { get; set; }
+        /// <summary>年龄</summary>
+        public int Age { get; set; }
 
         /// <summary>手机号</summary>
         public string Phone { get; set; }
@@ -31,5 +31,8 @@ namespace TplDemo.Model.ViewModel
         /// <summary>角色Id集合</summary>
 
         public string roleId { get; set; }
+
+        /// <summary></summary>
+        public bool IsDelete { get; set; }
     }
 }

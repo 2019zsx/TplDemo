@@ -41,5 +41,7 @@ namespace TplDemo.Model.DataModel
 
         /// <summary>是否启用</summary>
         public bool isEnable { get; set; }
+
+        public string component { get; set; }
     }
 }

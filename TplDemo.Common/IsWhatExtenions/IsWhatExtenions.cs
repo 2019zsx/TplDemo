@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace TplDemo.Common.IsWhatExtenions
 {
     /// <summary></summary>
-    public static class IsWhat
+    public static class IsWhatExtenions
     {
         /// <summary>值在的范围？</summary>
         /// <param name="thisValue"></param>

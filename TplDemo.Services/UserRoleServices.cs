@@ -4,6 +4,7 @@ using System.Text;
 using TplDemo.IServices;
 using TplDemo.Model.DataModel;
 using TplDemo.Repository.BASE;
+using TplDemo.Repository.UnitOfWork;
 
 namespace TplDemo.Services
 {

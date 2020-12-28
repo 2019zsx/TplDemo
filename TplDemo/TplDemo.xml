@@ -17,6 +17,7 @@
             <summary></summary>
             <param name="_dbsysUserInfoIServices"></param>
             <param name="_dbRoleIServices"></param>
+            <param name="_dbUse"></param>
         </member>
         <member name="M:TplDemo.Controllers.AccountController.SystemLogin(TplDemo.Model.ViewModel.ViewLogin)">
             <summary>系统登录</summary>
@@ -65,15 +66,37 @@
             <summary>获取菜单</summary>
             <returns></returns>
         </member>
+        <member name="T:TplDemo.Controllers.RoleController">
+            <summary>角色信息</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.#ctor(TplDemo.IServices.RoleIServices)">
+            <summary></summary>
+            <param name="_roleIServices"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.GetRoleList">
+            <summary>获取角色列表</summary>
+            <returns></returns>
+        </member>
         <member name="T:TplDemo.Controllers.SysUserController">
             <summary>用户信息</summary>
         </member>
         <member name="F:TplDemo.Controllers.SysUserController.dbsysUserInfoIServices">
             <summary>获取用户信息</summary>
         </member>
-        <member name="M:TplDemo.Controllers.SysUserController.#ctor(TplDemo.IServices.sysUserInfoIServices)">
+        <member name="M:TplDemo.Controllers.SysUserController.#ctor(TplDemo.Common.HttpContextUser.IUser,TplDemo.IServices.sysUserInfoIServices,TplDemo.IServices.RoleIServices)">
             <summary></summary>
             <param name="_dbsysUserInfoIServices"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.GetUserPage(System.Int32,System.Int32,System.String)">
+            <summary>获取用户信息</summary>
+            <param name="PageIndex"></param>
+            <param name="PageSize"></param>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.GetUser(System.Int32)">
+            <summary>获取用户信息</summary>
+            <returns></returns>
         </member>
         <member name="M:TplDemo.Controllers.SysUserController.Create(TplDemo.Model.ViewModel.ViewCreateUser)">
             <summary>创建用户</summary>

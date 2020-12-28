@@ -17,11 +17,12 @@ using Microsoft.AspNetCore.Authorization;
 using TplDemo.Common.HttpContextUser;
 using System.Security.Claims;
 using TplDemo.Common.TokenModel;
+using SqlSugar;
 
 namespace TplDemo.Controllers
 {
     /// <summary>用户登录信息</summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -48,7 +49,6 @@ namespace TplDemo.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("SystemLogin")]
         public async Task<PageModel<ViewToken>> SystemLogin(ViewLogin model)
         {
             var pageModel = new PageModel<ViewToken>();
@@ -92,7 +92,6 @@ namespace TplDemo.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetLoginRole")]
         public async Task<PageModel<List<VIewLoginRolelist>>> GetLoginRole(ViewLoginRole model)
         {
             var pageModel = new PageModel<List<VIewLoginRolelist>>();
@@ -135,6 +134,7 @@ namespace TplDemo.Controllers
         [Authorize]
         public async Task<PageModel<ViewUserinfo>> GetUserinfo()
         {
+            int s = "0".ObjToInt();
             var pageModel = new PageModel<ViewUserinfo>();
             ViewUserinfo viewUserinfo = new ViewUserinfo();
             var usermodel = await dbsysUserInfoIServices.QueryById(dbUse.uid);
