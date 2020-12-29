@@ -302,5 +302,28 @@ namespace TplDemo.Controllers
         }
 
         #endregion 删除用户
+
+        #region 更改用户状态
+
+        /// <summary>更改用户状态</summary>
+        /// <param name="id"></param>
+        /// <param name="isDelete"></param>
+        /// <returns></returns>
+
+        [HttpGet]
+        public async Task<PageModel<object>> isDelete(int id, bool isDelete)
+        {
+            var pageModel = new PageModel<object>();
+            var msg = await dbsysUserInfoIServices.Update(new sysUserInfoEntity() { Id = id, IsDelete = isDelete }, new List<string>() { "Id", "IsDelete" });
+            if (!msg)
+            {
+                pageModel.state = 30002;
+                pageModel.msg = "修改失败";
+                return pageModel;
+            }
+            return pageModel;
+        }
+
+        #endregion 更改用户状态
     }
 }
