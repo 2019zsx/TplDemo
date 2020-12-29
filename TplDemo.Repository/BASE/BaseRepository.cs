@@ -210,6 +210,11 @@ namespace TplDemo.Repository.BASE
             return await _db.Deleteable<TEntity>().In(ids).ExecuteCommandHasChangeAsync();
         }
 
+        public async Task<bool> DeleteByWhere(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            return await _db.Deleteable<TEntity>().Where(whereExpression).ExecuteCommandAsync() > 0;
+        }
+
         /// <summary>功能描述:查询所有数据</summary>
         /// <returns>数据列表</returns>
         public async Task<List<TEntity>> Query()

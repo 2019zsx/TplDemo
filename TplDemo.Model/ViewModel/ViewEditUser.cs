@@ -9,26 +9,32 @@ namespace TplDemo.Model.ViewModel
     {
         public int id { get; set; }
 
-        /// <summary>用户名 e</summary>
-        public string UserName { get; set; }
+        /// <summary>用户名</summary>
+        public string loginName { get; set; }
 
-        /// <summary>密码 e</summary>
-        public string Password { get; set; }
+        /// <summary>密码</summary>
+        public string password { get; set; }
+
+        /// <summary>姓名</summary>
+        public string userName { get; set; }
 
         /// <summary>性别 e</summary>
-        public bool? Sex { get; set; }
+        public int sex { get; set; }
 
-        /// <summary>出生日期 e</summary>
-        public DateTime? Birthday { get; set; }
+        /// <summary>年龄</summary>
+        public int age { get; set; }
 
-        /// <summary>手机号 e</summary>
-        public string Phone { get; set; }
+        /// <summary>手机号</summary>
+        public string phone { get; set; }
 
         /// <summary>e</summary>
-        public string Email { get; set; }
+        public string email { get; set; }
 
         /// <summary>角色Id集合</summary>
 
-        public string roleId { get; set; }
+        public IEnumerable<int> roleId { get; set; }
+
+        /// <summary></summary>
+        public bool isDelete { get; set; }
     }
 }

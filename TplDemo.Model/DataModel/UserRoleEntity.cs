@@ -14,14 +14,15 @@ namespace TplDemo.Model.DataModel
         public UserRoleEntity()
         {
         }
-
+        /// <summary></summary>
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+        public int Id { get; set; }
         /// <summary>用户Id</summary>
         public int UserID { get; set; }
 
         /// <summary>角色Id</summary>
         public int RoleID { get; set; }
 
-        /// <summary></summary>
-        public int Id { get; set; }
+    
     }
 }

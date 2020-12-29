@@ -11,6 +11,7 @@ namespace TplDemo.Model.DataModel
     [SugarTable("Users")]
     public partial class sysUserInfoEntity
     {
+        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         /// <summary></summary>
         public int Id { get; set; }
 

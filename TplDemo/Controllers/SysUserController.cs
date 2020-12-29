@@ -53,7 +53,9 @@ namespace TplDemo.Controllers
             mapper = _mapper;
         }
 
-        /// <summary>获取用户信息</summary>
+        #region 获取用户列表
+
+        /// <summary>获取用户列表</summary>
         /// <param name="PageIndex"></param>
         /// <param name="PageSize"></param>
         /// <param name="search"></param>
@@ -73,6 +75,10 @@ namespace TplDemo.Controllers
             return userlist;
         }
 
+        #endregion 获取用户列表
+
+        #region 获取用户信息
+
         /// <summary>获取用户信息</summary>
         /// <returns></returns>
         [HttpGet]
@@ -87,6 +93,10 @@ namespace TplDemo.Controllers
             return new PageModel<sysUserInfoEntity>() { data = userlist };
         }
 
+        #endregion 获取用户信息
+
+        #region 创建用户
+
         /// <summary>创建用户</summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -94,35 +104,34 @@ namespace TplDemo.Controllers
         [HttpPost]
         public async Task<PageModel<object>> Create(ViewCreateUser model)
         {
-            var dto = mapper.Map<sysUserInfoEntity>(model);
             var pageModel = new PageModel<object>();
-            if (model.LoginName.IsNullOrEmpty())
+            if (model.loginName.IsNullOrEmpty())
             {
                 pageModel.state = 30002;
                 pageModel.msg = "请填写登录名称";
                 return pageModel;
             }
-            var userdata = await dbsysUserInfoIServices.Query(c => c.LoginName == model.LoginName);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.LoginName == model.loginName);
             if (userdata.Count > 0)
             {
                 pageModel.state = 30002;
                 pageModel.msg = "当前登录名已存在！";
                 return pageModel;
             }
-            if (model.UserName.IsNullOrEmpty())
+            if (model.userName.IsNullOrEmpty())
             {
                 pageModel.state = 30002;
                 pageModel.msg = "请填写姓名";
                 return pageModel;
             }
 
-            if (model.Password.IsNullOrEmpty())
+            if (model.password.IsNullOrEmpty())
             {
                 pageModel.state = 30002;
                 pageModel.msg = "请填写密码";
                 return pageModel;
             }
-            model.Password = MD5Helper.MD5Encrypt32(model.Password);
+            model.password = MD5Helper.MD5Encrypt32(model.password);
             if (model.roleId.IsNullOrEmpty())
             {
                 pageModel.state = 30002;
@@ -134,20 +143,22 @@ namespace TplDemo.Controllers
                 unitOfWork.BeginTranReadUncommitted();
                 int uid = await dbsysUserInfoIServices.Add(new sysUserInfoEntity()
                 {
-                    Age = model.Age,
-                    Email = model.Email,
-                    IsDelete = model.IsDelete,
-                    LoginName = model.LoginName,
-                    Password = model.Password,
-                    Phone = model.Phone,
-                    Sex = model.Sex,
-                    UserName = model.UserName
+                    Age = model.age,
+                    Email = model.email,
+                    IsDelete = model.isDelete,
+                    LoginName = model.loginName,
+                    Password = model.password,
+                    Phone = model.phone,
+                    Sex = model.sex,
+                    UserName = model.userName
                 });
                 if (uid == 0)
                 {
                     throw new Exception("添加用户失败");
                 }
-                int[] roleidarr = model.roleId.Split(',').Select(c => c.ObjToInt()).ToArray();
+                // await userRoleIServices.DeleteByWhere(c => c.UserID == uid); int[] roleidarr =
+                // model.roleId.Split(',').Select(c => c.ObjToInt()).ToArray();
+                int[] roleidarr = model.roleId.ToArray();
                 List<UserRoleEntity> list = new List<UserRoleEntity>();
                 for (int i = 0; i < roleidarr.Length; i++)
                 {
@@ -169,5 +180,127 @@ namespace TplDemo.Controllers
             }
             return pageModel;
         }
+
+        #endregion 创建用户
+
+        #region 编辑用户
+
+        /// <summary>编辑用户</summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+
+        [HttpPut]
+        public async Task<PageModel<object>> Edit(ViewEditUser model)
+        {
+            var pageModel = new PageModel<object>();
+            if (model.userName.IsNullOrEmpty())
+            {
+                pageModel.state = 30002;
+                pageModel.msg = "请填写姓名";
+                return pageModel;
+            }
+
+            if (model.password.IsNullOrEmpty())
+            {
+                pageModel.state = 30002;
+                pageModel.msg = "请填写密码";
+                return pageModel;
+            }
+            var userdata = await dbsysUserInfoIServices.QueryById(model.id);
+            if (userdata.Password != model.password)
+            {
+                model.password = MD5Helper.MD5Encrypt32(model.password);
+            }
+
+            if (model.roleId.IsNullOrEmpty())
+            {
+                pageModel.state = 30002;
+                pageModel.msg = "请填选择角色";
+                return pageModel;
+            }
+            try
+            {
+                unitOfWork.BeginTranReadUncommitted();
+                bool msg = await dbsysUserInfoIServices.Update(new sysUserInfoEntity()
+                {
+                    Id = model.id,
+                    Age = model.age,
+                    Email = model.email,
+                    IsDelete = model.isDelete,
+                    LoginName = userdata.LoginName,
+                    Password = model.password,
+                    Phone = model.phone,
+                    Sex = model.sex,
+                    UserName = model.userName
+                });
+                if (!msg)
+                {
+                    throw new Exception("修改用户失败");
+                }
+                //int[] roleidarr = model.roleId.Split(',').Select(c => c.ObjToInt()).ToArray();
+                int[] roleidarr = model.roleId.ToArray();
+                // 先删除现有的用户
+                await userRoleIServices.DeleteByWhere(c => c.UserID == model.id);
+                List<UserRoleEntity> list = new List<UserRoleEntity>();
+                for (int i = 0; i < roleidarr.Length; i++)
+                {
+                    list.Add(new UserRoleEntity() { RoleID = roleidarr[i], UserID = model.id });
+                }
+                int roleid = await userRoleIServices.Add(list);
+                if (roleid == 0)
+                {
+                    throw new Exception("修改用户失败");
+                }
+                unitOfWork.CommitTranUncommitted();
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.RollbackTranUncommitted();
+                pageModel.state = 30002;
+                pageModel.msg = ex.Message;
+                return pageModel;
+            }
+            return pageModel;
+        }
+
+        #endregion 编辑用户
+
+        #region 删除用户
+
+        /// <summary>删除</summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        [HttpDelete]
+        public async Task<PageModel<object>> Del(int id)
+        {
+            var pageModel = new PageModel<object>();
+            try
+            {
+                unitOfWork.BeginTranReadUncommitted();
+                var msg = await dbsysUserInfoIServices.DeleteById(id);
+                if (!msg)
+                {
+                    throw new Exception("删除用户失败");
+                }
+                // 先删除现有的用户
+                msg = await userRoleIServices.DeleteByWhere(c => c.UserID == id);
+                if (!msg)
+                {
+                    throw new Exception("删除用户失败");
+                }
+                unitOfWork.CommitTranUncommitted();
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.RollbackTranUncommitted();
+                pageModel.state = 30002;
+                pageModel.msg = ex.Message;
+                return pageModel;
+            }
+            return pageModel;
+        }
+
+        #endregion 删除用户
     }
 }

@@ -63,12 +63,35 @@
         <member name="T:TplDemo.Controllers.RoleController">
             <summary>角色信息</summary>
         </member>
-        <member name="M:TplDemo.Controllers.RoleController.#ctor(TplDemo.IServices.RoleIServices)">
+        <member name="F:TplDemo.Controllers.RoleController.mapper">
             <summary></summary>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.#ctor(AutoMapper.IMapper,TplDemo.IServices.RoleIServices)">
+            <summary></summary>
+            <param name="_mapper"></param>
             <param name="_roleIServices"></param>
         </member>
         <member name="M:TplDemo.Controllers.RoleController.GetRoleList">
+            <summary>获取角色集合</summary>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.GetRolePage(System.Int32,System.Int32,System.String)">
             <summary>获取角色列表</summary>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.Create(TplDemo.Model.ViewModel.ViewCreateRole)">
+            <summary>添加角色</summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.Edit(TplDemo.Model.ViewModel.ViewEditRole)">
+            <summary>编辑角色</summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.RoleController.Del(System.Int32)">
+            <summary>删除角色</summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:TplDemo.Controllers.SysUserController">
@@ -90,7 +113,7 @@
             <param name="_userRoleIServices"></param>
         </member>
         <member name="M:TplDemo.Controllers.SysUserController.GetUserPage(System.Int32,System.Int32,System.String)">
-            <summary>获取用户信息</summary>
+            <summary>获取用户列表</summary>
             <param name="PageIndex"></param>
             <param name="PageSize"></param>
             <param name="search"></param>
@@ -103,6 +126,16 @@
         <member name="M:TplDemo.Controllers.SysUserController.Create(TplDemo.Model.ViewModel.ViewCreateUser)">
             <summary>创建用户</summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.Edit(TplDemo.Model.ViewModel.ViewEditUser)">
+            <summary>编辑用户</summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.SysUserController.Del(System.Int32)">
+            <summary>删除</summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:TplDemo.CorsService.SqlsugarSetup">

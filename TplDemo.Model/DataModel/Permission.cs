@@ -15,6 +15,7 @@ namespace TplDemo.Model.DataModel
         {
         }
 
+        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         /// <summary></summary>
         public int ID { get; set; }
 

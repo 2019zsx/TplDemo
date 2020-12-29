@@ -99,6 +99,11 @@ namespace TplDemo.Services.BASE
             return await BaseDal.DeleteById(id);
         }
 
+        public async Task<bool> DeleteByWhere(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            return await BaseDal.DeleteByWhere(whereExpression);
+        }
+
         /// <summary>删除指定ID集合的数据(批量删除)</summary>
         /// <param name="ids">主键ID集合</param>
         /// <returns></returns>

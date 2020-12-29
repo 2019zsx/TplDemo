@@ -11,10 +11,11 @@ namespace TplDemo.Model.DataModel
     [SugarTable("Roles")]
     public partial class RoleEntity
     {
+        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         /// <summary></summary>
         public int ID { get; set; }
 
-        /// <summary>角色Id</summary>
+        /// <summary>角色名称</summary>
         public string RoleName { get; set; }
 
         /// <summary>是否启用</summary>

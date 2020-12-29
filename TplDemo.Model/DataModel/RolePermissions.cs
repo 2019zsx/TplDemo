@@ -16,7 +16,7 @@ namespace TplDemo.Model.DataModel
         }
 
         /// <summary></summary>
-
+        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         public int Id { get; set; }
 
         /// <summary>角色ID</summary>
