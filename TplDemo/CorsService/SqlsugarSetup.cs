@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TplDemo.Common;
 using TplDemo.Common.Config;
+using TplDemo.Common.Helper;
 
 namespace TplDemo.CorsService
 {
@@ -40,12 +43,38 @@ namespace TplDemo.CorsService
                             DbType = (DbType)m.dbtype,
                             IsAutoCloseConnection = true,
                             IsShardSameThread = false,
+
+                            //db.Aop.OnDiffLogEvent = it =>
+                            //{
+                            //    var editBeforeData = it.BeforeData;//操作前记录  包含： 字段描述 列名 值 表名 表描述
+                            //    var editAfterData = it.AfterData;//操作后记录   包含： 字段描述 列名 值  表名 表描述
+                            //    var sql = it.Sql;
+                            //    var parameter = it.Parameters;
+                            //    var data = it.BusinessData;//这边会显示你传进来的对象
+                            //    var time = it.Time;
+                            //    var diffType = it.DiffType;//enum insert 、update and delete
+
+                            //    //Write logic
+                            //};
                             AopEvents = new AopEvents
                             {
-                                OnLogExecuting = (sql, p) =>
+                                OnDiffLogEvent = it =>
                                 {
-                                    // SQL语句日志
-                                }
+                                    //var editBeforeData = it.BeforeData;//操作前记录  包含： 字段描述 列名 值 表名 表描述
+                                    //var editAfterData = it.AfterData;//操作后记录   包含： 字段描述 列名 值  表名 表描述
+                                    //var sql = it.Sql;
+                                    //var parameter = it.Parameters;
+                                    //var data = it.BusinessData;//这边会显示你传进来的对象
+                                    //var time = it.Time;
+                                    //var diffType = it.DiffType;//enum insert 、update and delete
+
+                                    //Write logic
+                                },
+                                OnLogExecuting = (sql, p) =>
+                                        {
+                                            string Parameter = GetParas(p);
+                                            // Log.Error($"{sql}---{Parameter}");
+                                        }
                             },
                             MoreSettings = new ConnMoreSettings()
                             {
