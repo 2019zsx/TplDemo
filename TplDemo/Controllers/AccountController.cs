@@ -76,12 +76,12 @@ namespace TplDemo.Controllers
                 return pageModel;
             }
             var usermodel = userdata.FirstOrDefault();
-            // 判断当前的选择的角色此用户是否存在
+            // 判断当前的选择的角色和用户是否存在
             var isuserrole = await dbRoleIServices.Isuserrole(model.roleid, usermodel.Id);
             if (!isuserrole)
             {
                 pageModel.success = false;
-                pageModel.msg = "当前选择的角色此用户不存在！";
+                pageModel.msg = "登录失败";
                 return pageModel;
             }
             pageModel.data = JwtHelper.GetToken(new Common.TokenModel.Userinfo() { roleid = model.roleid, uid = usermodel.Id, username = usermodel.UserName }, "web");
