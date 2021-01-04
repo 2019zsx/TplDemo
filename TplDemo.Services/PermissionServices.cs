@@ -39,6 +39,20 @@ namespace TplDemo.Services
             var rmpdata = await GetRoleModulePermission(roleid);
             int[] rmparrid = rmpdata.Select(c => c.PermissionID.ObjToInt()).ToArray();
             var Permissionlist = await dal.Query(c => rmparrid.Contains(c.ID));
+
+            return GetMenuTreelist(Permissionlist);
+        }
+
+        /// <summary>获取所有</summary>
+        /// <returns></returns>
+        public async Task<List<ViewMenuTree>> GetMenuTreeAll()
+        {
+            var Permissionlist = await dal.Query();
+            return GetMenuTreelist(Permissionlist);
+        }
+
+        public List<ViewMenuTree> GetMenuTreelist(List<Permission> Permissionlist)
+        {
             var MenuTreedata = Permissionlist.Where(c => c.ParentID == 0).ToList();
             List<ViewMenuTree> permissionTrees = new List<ViewMenuTree>();
             foreach (var child in MenuTreedata)

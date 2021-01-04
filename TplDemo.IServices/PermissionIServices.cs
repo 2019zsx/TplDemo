@@ -19,5 +19,7 @@ namespace TplDemo.IServices
         /// <param name="roleid"></param>
         /// <returns></returns>
         Task<List<ViewMenuTree>> GetMenuTree(int roleid);
+
+        Task<List<ViewMenuTree>> GetMenuTreeAll();
     }
 }
