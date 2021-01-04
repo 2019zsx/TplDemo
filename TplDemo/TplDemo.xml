@@ -79,6 +79,10 @@
             <summary>获取角色列表</summary>
             <returns></returns>
         </member>
+        <member name="M:TplDemo.Controllers.RoleController.GetRole(System.Int32)">
+            <summary>获取用户信息</summary>
+            <returns></returns>
+        </member>
         <member name="M:TplDemo.Controllers.RoleController.Create(TplDemo.Model.ViewModel.ViewCreateRole)">
             <summary>添加角色</summary>
             <param name="model"></param>

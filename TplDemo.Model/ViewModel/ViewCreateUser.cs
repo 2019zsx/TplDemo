@@ -33,6 +33,6 @@ namespace TplDemo.Model.ViewModel
         public IEnumerable<int> roleId { get; set; }
 
         /// <summary></summary>
-        public bool isDelete { get; set; }
+        public bool isDeleted { get; set; }
     }
 }

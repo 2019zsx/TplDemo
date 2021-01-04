@@ -46,7 +46,7 @@ namespace TplDemo.Controllers
         {
             return new PageModel<List<RoleEntity>>()
             {
-                data = await roleIServices.Query(c => c.IsDeleted == false)
+                data = await roleIServices.Query(c => c.isDeleted == false)
             };
         }
 
@@ -59,15 +59,24 @@ namespace TplDemo.Controllers
         [HttpGet]
         public async Task<PageModel<List<RoleEntity>>> GetRolePage(int PageIndex = 1, int PageSize = 10, string search = "")
         {
-            var userlist = await roleIServices.QueryPage(null, PageIndex, PageSize, "id desc");
-            return new PageModel<List<RoleEntity>>()
-            {
-                data = await roleIServices.Query(c => c.IsDeleted == false)
-            };
+            var rolelist = await roleIServices.QueryPage(null, PageIndex, PageSize, "id desc");
+            return rolelist;
         }
 
         #endregion 获取角色列表
 
+        #region 获取用户信息
+
+        /// <summary>获取用户信息</summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PageModel<RoleEntity>> GetRole(int id)
+        {
+            var model = await roleIServices.QueryById(id);
+            return new PageModel<RoleEntity>() { data = model };
+        }
+
+        #endregion 获取用户信息
         #region 添加角色
 
         /// <summary>添加角色</summary>
@@ -84,7 +93,7 @@ namespace TplDemo.Controllers
 
                 return pageModel;
             }
-            int id = await roleIServices.Add(new RoleEntity() { RoleName = model.roleName, IsDeleted = false });
+            int id = await roleIServices.Add(new RoleEntity() { roleName = model.roleName, isDeleted = false, createTime = DateTime.Now, describe = model.describe });
             if (id == 0)
             {
                 pageModel.state = 30002;
@@ -113,7 +122,7 @@ namespace TplDemo.Controllers
 
                 return pageModel;
             }
-            bool msg = await roleIServices.Update(new RoleEntity() { ID = model.id, RoleName = model.roleName, IsDeleted = false });
+            bool msg = await roleIServices.Update(new RoleEntity() { ID = model.id, roleName = model.roleName, describe = model.describe, isDeleted = model.isDeleted, createTime = DateTime.Now });
             if (!msg)
             {
                 pageModel.state = 30002;

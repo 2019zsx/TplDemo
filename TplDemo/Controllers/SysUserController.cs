@@ -70,7 +70,7 @@ namespace TplDemo.Controllers
                 var roleuserdata = await roleIServices.GetdbUserRole(item.Id);
                 var rolearr = roleuserdata.Select(c => c.RoleID).ToArray();
                 var roledata = await roleIServices.Query(c => rolearr.Contains(c.ID));
-                item.roleName = string.Join(",", roledata.Select(c => c.RoleName).ToArray());
+                item.roleName = string.Join(",", roledata.Select(c => c.roleName).ToArray());
             }
             return userlist;
         }
@@ -84,13 +84,18 @@ namespace TplDemo.Controllers
         [HttpGet]
         public async Task<PageModel<sysUserInfoEntity>> GetUser(int id)
         {
-            var userlist = await dbsysUserInfoIServices.QueryById(id);
-            if (userlist != null)
+            var userlist = await dbsysUserInfoIServices.Query(c => c.Id == id && c.isDeleted == false);
+            var usermodel = userlist.FirstOrDefault();
+            if (usermodel != null)
             {
-                var roleuserdata = await roleIServices.GetdbUserRole(userlist.Id);
-                userlist.roleId = roleuserdata.Select(c => c.RoleID).ToArray();
+                var roleuserdata = await roleIServices.GetdbUserRole(usermodel.Id);
+                usermodel.roleId = roleuserdata.Select(c => c.RoleID).ToArray();
             }
-            return new PageModel<sysUserInfoEntity>() { data = userlist };
+            else
+            {
+                return new PageModel<sysUserInfoEntity>() { state = 403, msg = "当前用户不存在" };
+            }
+            return new PageModel<sysUserInfoEntity>() { data = usermodel };
         }
 
         #endregion 获取用户信息
@@ -145,7 +150,7 @@ namespace TplDemo.Controllers
                 {
                     Age = model.age,
                     Email = model.email,
-                    IsDelete = model.isDelete,
+                    isDeleted = model.isDeleted,
                     LoginName = model.loginName,
                     Password = model.password,
                     Phone = model.phone,
@@ -226,7 +231,7 @@ namespace TplDemo.Controllers
                     Id = model.id,
                     Age = model.age,
                     Email = model.email,
-                    IsDelete = model.isDelete,
+                    isDeleted = model.isDeleted,
                     LoginName = userdata.LoginName,
                     Password = model.password,
                     Phone = model.phone,
@@ -237,9 +242,9 @@ namespace TplDemo.Controllers
                 {
                     throw new Exception("修改用户失败");
                 }
-                //int[] roleidarr = model.roleId.Split(',').Select(c => c.ObjToInt()).ToArray();
+
                 int[] roleidarr = model.roleId.ToArray();
-                // 先删除现有的用户
+                // 先删除现有的用户角色
                 await userRoleIServices.DeleteByWhere(c => c.UserID == model.id);
                 List<UserRoleEntity> list = new List<UserRoleEntity>();
                 for (int i = 0; i < roleidarr.Length; i++)
@@ -314,7 +319,7 @@ namespace TplDemo.Controllers
         public async Task<PageModel<object>> isDelete(int id, bool isDelete)
         {
             var pageModel = new PageModel<object>();
-            var msg = await dbsysUserInfoIServices.Update(new sysUserInfoEntity() { Id = id, IsDelete = isDelete }, new List<string>() { "Id", "IsDelete" });
+            var msg = await dbsysUserInfoIServices.Update(new sysUserInfoEntity() { Id = id, isDeleted = isDelete }, new List<string>() { "Id", "IsDelete" });
             if (!msg)
             {
                 pageModel.state = 30002;

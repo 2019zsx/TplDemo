@@ -36,7 +36,7 @@ namespace TplDemo.Model.DataModel
         /// <summary>e</summary>
         public string Email { get; set; }
 
-        public bool IsDelete { get; set; }
+        public bool isDeleted { get; set; }
         /// <summary>角色名称</summary>
 
         [SugarColumn(IsIgnore = true)]

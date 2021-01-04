@@ -11,15 +11,28 @@ namespace TplDemo.Model.DataModel
     [SugarTable("Roles")]
     public partial class RoleEntity
     {
-        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         /// <summary></summary>
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true, ColumnName = "ID")]
         public int ID { get; set; }
 
-        /// <summary>角色名称</summary>
-        public string RoleName { get; set; }
+        [SugarColumn(ColumnName = "RoleName")]
 
+        /// <summary>角色名称</summary>
+        public string roleName { get; set; }
+
+        /// <summary>描述</summary>
+
+        [SugarColumn(ColumnName = "describe")]
+        public string describe { get; set; }
+
+        [SugarColumn(ColumnName = "IsDeleted")]
         /// <summary>是否启用</summary>
 
-        public bool IsDeleted { get; set; }
+        public bool isDeleted { get; set; }
+
+        [SugarColumn(ColumnName = "createTime")]
+        /// <summary>添加时间</summary>
+
+        public DateTime? createTime { get; set; }
     }
 }

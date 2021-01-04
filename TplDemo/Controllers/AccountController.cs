@@ -68,7 +68,7 @@ namespace TplDemo.Controllers
             }
 
             string pdw = MD5Helper.MD5Encrypt32(model.updw);
-            var userdata = await dbsysUserInfoIServices.Query(c => c.IsDelete == false && c.LoginName == model.uloginname && c.Password == pdw);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.isDeleted == false && c.LoginName == model.uloginname && c.Password == pdw);
             if (userdata.Count == 0)
             {
                 pageModel.success = false;
@@ -111,7 +111,7 @@ namespace TplDemo.Controllers
             }
 
             string pdw = MD5Helper.MD5Encrypt32(model.updw);
-            var userdata = await dbsysUserInfoIServices.Query(c => c.IsDelete == false && c.LoginName == model.uloginname && c.Password == pdw);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.isDeleted == false && c.LoginName == model.uloginname && c.Password == pdw);
             if (userdata.Count == 0)
             {
                 pageModel.success = false;
@@ -121,8 +121,8 @@ namespace TplDemo.Controllers
             var usermodel = userdata.FirstOrDefault();
             // 获取当前用户对应的角色信息
             var userroledata = await dbRoleIServices.GetdbUserRole(usermodel.Id);
-            int[] roleidarr = userroledata.Select(c => c.Id).ToArray();
-            Expression<Func<RoleEntity, VIewLoginRolelist>> selectexp = it => new VIewLoginRolelist() { roleid = it.ID, rolename = it.RoleName };
+            int[] roleidarr = userroledata.Select(c => c.RoleID).ToArray();
+            Expression<Func<RoleEntity, VIewLoginRolelist>> selectexp = it => new VIewLoginRolelist() { roleid = it.ID, rolename = it.roleName };
             var roeldata = await dbRoleIServices.Query(c => roleidarr.Contains(c.ID), selectexp, "");
             pageModel.data = roeldata;
             return pageModel;
@@ -191,7 +191,7 @@ namespace TplDemo.Controllers
                 pageModel.msg = "（验证）token无效";
                 return pageModel;
             }
-            var userdata = await dbsysUserInfoIServices.Query(c => c.IsDelete == false && c.Id == userinfo.uid);
+            var userdata = await dbsysUserInfoIServices.Query(c => c.isDeleted == false && c.Id == userinfo.uid);
 
             if (userdata == null)
             {
