@@ -45,6 +45,8 @@ namespace TplDemo.Controllers
             dbUse = _dbUse;
         }
 
+        #region 系统登录
+
         /// <summary>系统登录</summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -88,6 +90,10 @@ namespace TplDemo.Controllers
             return pageModel;
         }
 
+        #endregion 系统登录
+
+        #region 获取角色信息
+
         /// <summary>获取角色信息</summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -128,6 +134,10 @@ namespace TplDemo.Controllers
             return pageModel;
         }
 
+        #endregion 获取角色信息
+
+        #region 获取用户信息
+
         /// <summary>获取用户信息</summary>
         /// <returns></returns>
         [HttpGet]
@@ -155,6 +165,10 @@ namespace TplDemo.Controllers
             };
             return pageModel;
         }
+
+        #endregion 获取用户信息
+
+        #region 刷新token
 
         /// <summary>刷新token</summary>
         /// <param name="model"></param>
@@ -211,5 +225,7 @@ namespace TplDemo.Controllers
             pageModel.data = jwt;
             return pageModel;
         }
+
+        #endregion 刷新token
     }
 }

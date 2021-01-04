@@ -136,7 +136,8 @@ namespace TplDemo
             #endregion 授权
         }
 
-        // 注意在Program.CreateHostBuilder，添加Autofac服务工厂
+        /// <summary>注意在Program.CreateHostBuilder，添加Autofac服务工厂</summary>
+        /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
             //添加依赖注入关系
