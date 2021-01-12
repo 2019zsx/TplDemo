@@ -10,12 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\AlipayController.cs" />
     <Compile Remove="Controllers\DefaultController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.Alipay" Version="3.2.2" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.Security" Version="3.2.2" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="3.2.2" />
     <PackageReference Include="IGeekFan.AspNetCore.Knife4jUI" Version="0.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="5.0.0" />
