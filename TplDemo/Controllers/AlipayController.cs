@@ -18,6 +18,7 @@ namespace TplDemo.Controllers
     [ApiController]
     public class AlipayController : ControllerBase
     {
+        /// <summary>https://gitee.com/essensoft/payment(支付文档说明)</summary>
         private readonly IAlipayClient _client;
         private readonly IOptions<AlipayOptions> _optionsAccessor;
 
