@@ -10,7 +10,7 @@ using System.Text;
 namespace TplDemo.Common.Helper
 {
     /// <summary></summary>
-    public class Log
+    public class CreateLog
     {
         private static ILoggerRepository repository { get; set; }
         private static ILog _log;

@@ -21,6 +21,7 @@ using TplDemo.Extensions;
 using TplDemo.Extensions.AutofacModule;
 using AutoMapper;
 using TplDemo.Extensions.Mapper;
+using TplDemo.Common.Helper;
 
 namespace TplDemo
 {
@@ -73,8 +74,13 @@ namespace TplDemo
            .AddControllers()
             .AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                // options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                //时间格式转换
                 options.JsonSerializerOptions.Converters.Add(new DateTimeNullableConverter());
+                // 解决 前端数字string类型传后台int 类型接收报400错误
+                options.JsonSerializerOptions.Converters.Add(new IntToStringConverter());
+                // 驼峰格式
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;//
             });
             services.Configure<IISServerOptions>(options =>
             {

@@ -11,6 +11,7 @@ namespace TplDemo.Model.DataModel
     [SugarTable("RolePermissions")]
     public partial class RolePermissions
     {
+        /// <summary></summary>
         public RolePermissions()
         {
         }
@@ -24,6 +25,8 @@ namespace TplDemo.Model.DataModel
 
         /// <summary>权限ID</summary>
         public int PermissionID { get; set; }
+
+        /// <summary></summary>
 
         public bool? IsDeleted { get; set; }
     }
