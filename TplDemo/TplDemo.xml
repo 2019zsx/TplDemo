@@ -38,6 +38,76 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="T:TplDemo.Controllers.AlipayController">
+            <summary>支付宝下单控制器&gt;https://gitee.com/essensoft/payment(支付文档说明)</summary>
+        </member>
+        <member name="F:TplDemo.Controllers.AlipayController._client">
+            <summary>https://gitee.com/essensoft/payment(支付文档说明)</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.#ctor(Essensoft.AspNetCore.Payment.Alipay.IAlipayClient,Microsoft.Extensions.Options.IOptions{Essensoft.AspNetCore.Payment.Alipay.AlipayOptions})">
+            <summary></summary>
+            <param name="client"></param>
+            <param name="optionsAccessor"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.PreCreate(TplDemo.Model.ViewModel.ViewPayment.AlipayTradePreCreateViewModel)">
+            <summary>当面付-扫码支付</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.Pay(TplDemo.Model.ViewModel.ViewPayment.AlipayTradePayViewModel)">
+            <summary>当面付-二维码/条码/声波支付</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.AppPay(TplDemo.Model.ViewModel.ViewPayment.AlipayTradeAppPayViewModel)">
+            <summary>APP支付</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.PagePay(TplDemo.Model.ViewModel.ViewPayment.AlipayTradePagePayViewModel)">
+            <summary>电脑网站支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.WapPay(TplDemo.Model.ViewModel.ViewPayment.AlipayTradeWapPayViewModel)">
+            <summary>手机网站支付</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.Query(TplDemo.Model.ViewModel.ViewPayment.AlipayTradeQueryViewModel)">
+            <summary>交易查询</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.Refund(TplDemo.Model.ViewModel.ViewPayment.AlipayTradeRefundViewModel)">
+            <summary>交易退款</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.RefundQuery(TplDemo.Model.ViewModel.ViewPayment.AlipayTradeRefundQueryViewModel)">
+            <summary>退款查询</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayController.AccountQuery(TplDemo.Model.ViewModel.ViewPayment.AlipayAccountQueryViewModel)">
+            <summary>余额查询</summary>
+        </member>
+        <member name="T:TplDemo.Controllers.AlipayNotifyController">
+            <summary>支付宝回调</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayNotifyController.Gateway">
+            <summary>应用网关</summary>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayNotifyController.Precreate">
+            <summary>扫码支付异步通知</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayNotifyController.AppPay">
+            <summary>APP支付异步通知</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayNotifyController.PagePay">
+            <summary>电脑网站支付异步通知</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayNotifyController.WapPay">
+            <summary>手机网站支付异步通知</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayNotifyController.Close">
+            <summary>交易关闭异步通知</summary>
+        </member>
+        <member name="T:TplDemo.Controllers.AlipayReturnController">
+            <summary>支付宝回调</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayReturnController.PagePay">
+            <summary>电脑网站支付 - 同步跳转</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.AlipayReturnController.WapPay">
+            <summary>手机网站支付 - 同步跳转</summary>
+        </member>
         <member name="T:TplDemo.Controllers.Log1Controller">
             <summary>添加日志实例</summary>
         </member>
@@ -48,6 +118,9 @@
             <summary>添加日志</summary>
             <returns></returns>
         </member>
+        <member name="T:TplDemo.Controllers.PaymentController">
+            <summary>支付控制器</summary>
+        </member>
         <member name="T:TplDemo.Controllers.PermissionController">
             <summary>权限管理</summary>
         </member>
@@ -57,7 +130,25 @@
             <param name="_dbpermissionIServices"></param>
         </member>
         <member name="M:TplDemo.Controllers.PermissionController.GetMenuTree">
-            <summary>获取菜单</summary>
+            <summary>根据角色获取菜单</summary>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.GetMenuTreeAll">
+            <summary>获取所有菜单</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.Create(TplDemo.Model.ViewModel.ViewCreatePermission)">
+            <summary>添加菜单</summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.Edit(TplDemo.Model.ViewModel.ViewEditPermission)">
+            <summary>编辑菜单</summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.Del(System.Int32)">
+            <summary>删除菜单</summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:TplDemo.Controllers.RoleController">
@@ -97,6 +188,13 @@
             <summary>删除角色</summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="T:TplDemo.Controllers.RolepermissionController">
+            <summary></summary>
+        </member>
+        <member name="M:TplDemo.Controllers.RolepermissionController.#ctor(TplDemo.IServices.RolepermissionIServices)">
+            <summary></summary>
+            <param name="_rolepermissionIServices"></param>
         </member>
         <member name="T:TplDemo.Controllers.SysUserController">
             <summary>用户信息</summary>
@@ -148,6 +246,92 @@
             <param name="isDelete"></param>
             <returns></returns>
         </member>
+        <member name="T:TplDemo.Controllers.WeChatPayController">
+            <summary>微信支付</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.MicroPay(TplDemo.Model.ViewModel.ViewPayment.WeChatPayMicroPayViewModel)">
+            <summary>刷卡支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.PubPay(TplDemo.Model.ViewModel.ViewPayment.WeChatPayPubPayViewModel)">
+            <summary>公众号支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.QrCodePay(TplDemo.Model.ViewModel.ViewPayment.WeChatPayQrCodePayViewModel)">
+            <summary>扫码支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.AppPay(TplDemo.Model.ViewModel.ViewPayment.WeChatPayAppPayViewModel)">
+            <summary>APP支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.H5Pay(TplDemo.Model.ViewModel.ViewPayment.WeChatPayH5PayViewModel)">
+            <summary>H5支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.MiniProgramPay(TplDemo.Model.ViewModel.ViewPayment.WeChatPayMiniProgramPayViewModel)">
+            <summary>小程序支付</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.OrderQuery(TplDemo.Model.ViewModel.ViewPayment.WeChatPayOrderQueryViewModel)">
+            <summary>查询订单</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.Reverse(TplDemo.Model.ViewModel.ViewPayment.WeChatPayReverseViewModel)">
+            <summary>撤销订单</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.CloseOrder(TplDemo.Model.ViewModel.ViewPayment.WeChatPayCloseOrderViewModel)">
+            <summary>关闭订单</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.Refund(TplDemo.Model.ViewModel.ViewPayment.WeChatPayRefundViewModel)">
+            <summary>申请退款</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.RefundQuery(TplDemo.Model.ViewModel.ViewPayment.WeChatPayRefundQueryViewModel)">
+            <summary>查询退款</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.DownloadBill(TplDemo.Model.ViewModel.ViewPayment.WeChatPayDownloadBillViewModel)">
+            <summary>下载对账单</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.DownloadFundFlow(TplDemo.Model.ViewModel.ViewPayment.WeChatPayDownloadFundFlowViewModel)">
+            <summary>下载资金账单</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.Transfers(TplDemo.Model.ViewModel.ViewPayment.WeChatPayTransfersViewModel)">
+            <summary>企业付款到零钱</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.GetTransferInfo(TplDemo.Model.ViewModel.ViewPayment.WeChatPayGetTransferInfoViewModel)">
+            <summary>查询企业付款</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.PayBank(TplDemo.Model.ViewModel.ViewPayment.WeChatPayPayBankViewModel)">
+            <summary>企业付款到银行卡</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.QueryBank(TplDemo.Model.ViewModel.ViewPayment.WeChatPayQueryBankViewModel)">
+            <summary>查询企业付款银行卡</summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.GetPublicKey">
+            <summary>获取RSA加密公钥</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayController.ProfitSharingAddReceiver(TplDemo.Model.ViewModel.ViewPayment.WeChatPayProfitSharingAddReceiverViewModel)">
+            <summary>添加分账接收方</summary>
+        </member>
+        <member name="T:TplDemo.Controllers.WeChatPayNotifyController">
+            <summary>微信回调</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayNotifyController.Unifiedorder">
+            <summary>统一下单支付结果通知</summary>
+        </member>
+        <member name="M:TplDemo.Controllers.WeChatPayNotifyController.Refund">
+            <summary>退款结果通知</summary>
+        </member>
         <member name="T:TplDemo.CorsService.SqlsugarSetup">
             <summary>SqlSugar 启动服务</summary>
         </member>
@@ -163,6 +347,10 @@
         <member name="M:TplDemo.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary></summary>
             <param name="services"></param>
+        </member>
+        <member name="M:TplDemo.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>注意在Program.CreateHostBuilder，添加Autofac服务工厂</summary>
+            <param name="builder"></param>
         </member>
         <member name="M:TplDemo.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary></summary>

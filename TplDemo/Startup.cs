@@ -22,6 +22,8 @@ using TplDemo.Extensions.AutofacModule;
 using AutoMapper;
 using TplDemo.Extensions.Mapper;
 using TplDemo.Common.Helper;
+using Essensoft.AspNetCore.Payment.WeChatPay;
+using Essensoft.AspNetCore.Payment.Alipay;
 
 namespace TplDemo
 {
@@ -134,6 +136,17 @@ namespace TplDemo
             services.AddScoped<IUser, User>();
 
             #endregion 填充用户信息
+
+            #region 支付注入
+
+            services.AddAlipay();
+            services.AddWeChatPay();
+
+            // 在 appsettings.json(开发环境：appsettings.Development.json) 中 配置选项
+            services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
+            services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
+
+            #endregion 支付注入
 
             #region 授权
 

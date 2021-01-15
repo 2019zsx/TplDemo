@@ -13,13 +13,14 @@ using TplDemo.Model.ViewModel.ViewPayment;
 
 namespace TplDemo.Controllers
 {
-    /// <summary>支付宝支付控制器</summary>
-    [Route("api/[controller]")]
+    /// <summary>支付宝下单控制器&gt;https://gitee.com/essensoft/payment(支付文档说明)</summary>
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AlipayController : ControllerBase
     {
         /// <summary>https://gitee.com/essensoft/payment(支付文档说明)</summary>
         private readonly IAlipayClient _client;
+
         private readonly IOptions<AlipayOptions> _optionsAccessor;
 
         /// <summary></summary>
@@ -126,6 +127,8 @@ namespace TplDemo.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        #region 手机网站支付
+
         /// <summary>手机网站支付</summary>
         [HttpPost]
         public async Task<IActionResult> WapPay(AlipayTradeWapPayViewModel viewMode)
@@ -147,6 +150,10 @@ namespace TplDemo.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        #endregion 手机网站支付
+
+        #region 交易查询
+
         /// <summary>交易查询</summary>
         [HttpPost]
         public async Task<IActionResult> Query(AlipayTradeQueryViewModel viewMode)
@@ -163,6 +170,10 @@ namespace TplDemo.Controllers
             var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             return Ok(response.Body);
         }
+
+        #endregion 交易查询
+
+        #region 交易退款
 
         /// <summary>交易退款</summary>
         [HttpPost]
@@ -184,6 +195,10 @@ namespace TplDemo.Controllers
             return Ok(response.Body);
         }
 
+        #endregion 交易退款
+
+        #region 退款查询
+
         /// <summary>退款查询</summary>
         [HttpPost]
         public async Task<IActionResult> RefundQuery(AlipayTradeRefundQueryViewModel viewMode)
@@ -202,58 +217,70 @@ namespace TplDemo.Controllers
             return Ok(response.Body);
         }
 
-        /// <summary>交易关闭</summary>
-        [HttpPost]
-        public async Task<IActionResult> Close(AlipayTradeCloseViewModel viewMode)
-        {
-            var model = new AlipayTradeCloseModel
-            {
-                OutTradeNo = viewMode.OutTradeNo,
-                TradeNo = viewMode.TradeNo,
-            };
+        #endregion 退款查询
 
-            var req = new AlipayTradeCloseRequest();
-            req.SetBizModel(model);
-            req.SetNotifyUrl(viewMode.NotifyUrl);
+        //#region 交易关闭
 
-            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
-            return Ok(response.Body);
-        }
+        ///// <summary>交易关闭</summary>
+        //[HttpPost]
+        //public async Task<IActionResult> Close(AlipayTradeCloseViewModel viewMode)
+        //{
+        //    var model = new AlipayTradeCloseModel
+        //    {
+        //        OutTradeNo = viewMode.OutTradeNo,
+        //        TradeNo = viewMode.TradeNo,
+        //    };
 
-        /// <summary>统一转账</summary>
-        [HttpPost]
-        public async Task<IActionResult> Transfer(AlipayTransferViewModel viewMode)
-        {
-            var model = new AlipayFundTransUniTransferModel
-            {
-                OutBizNo = viewMode.OutBizNo,
-                TransAmount = viewMode.TransAmount,
-                ProductCode = viewMode.ProductCode,
-                BizScene = viewMode.BizScene,
-                PayeeInfo = new Participant { Identity = viewMode.PayeeIdentity, IdentityType = viewMode.PayeeIdentityType, Name = viewMode.PayeeName },
-                Remark = viewMode.Remark
-            };
-            var req = new AlipayFundTransUniTransferRequest();
-            req.SetBizModel(model);
-            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
-            return Ok(response.Body);
-        }
+        // var req = new AlipayTradeCloseRequest(); req.SetBizModel(model); req.SetNotifyUrl(viewMode.NotifyUrl);
+
+        //    var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
+        //    return Ok(response.Body);
+        //}
+
+        //#endregion 交易关闭
+        //#region 统一转账
+
+        ///// <summary>统一转账</summary>
+        //[HttpPost]
+        //public async Task<IActionResult> Transfer(AlipayTransferViewModel viewMode)
+        //{
+        //    var model = new AlipayFundTransUniTransferModel
+        //    {
+        //        OutBizNo = viewMode.OutBizNo,
+        //        TransAmount = viewMode.TransAmount,
+        //        ProductCode = viewMode.ProductCode,
+        //        BizScene = viewMode.BizScene,
+        //        PayeeInfo = new Participant { Identity = viewMode.PayeeIdentity, IdentityType = viewMode.PayeeIdentityType, Name = viewMode.PayeeName },
+        //        Remark = viewMode.Remark
+        //    };
+        //    var req = new AlipayFundTransUniTransferRequest();
+        //    req.SetBizModel(model);
+        //    var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
+        //    return Ok(response.Body);
+        //}
+        //#endregion
+
+        #region 查询统一转账订单
 
         /// <summary>查询统一转账订单</summary>
-        [HttpPost]
-        public async Task<IActionResult> TransQuery(AlipayTransQueryViewModel viewMode)
-        {
-            var model = new AlipayFundTransCommonQueryModel
-            {
-                OutBizNo = viewMode.OutBizNo,
-                OrderId = viewMode.OrderId
-            };
+        //[HttpPost]
+        //public async Task<IActionResult> TransQuery(AlipayTransQueryViewModel viewMode)
+        //{
+        //    var model = new AlipayFundTransCommonQueryModel
+        //    {
+        //        OutBizNo = viewMode.OutBizNo,
+        //        OrderId = viewMode.OrderId
+        //    };
 
-            var req = new AlipayFundTransCommonQueryRequest();
-            req.SetBizModel(model);
-            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
-            return Ok(response.Body);
-        }
+        //    var req = new AlipayFundTransCommonQueryRequest();
+        //    req.SetBizModel(model);
+        //    var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
+        //    return Ok(response.Body);
+        //}
+
+        #endregion 查询统一转账订单
+
+        #region 余额查询
 
         /// <summary>余额查询</summary>
         [HttpPost]
@@ -271,5 +298,7 @@ namespace TplDemo.Controllers
             // ViewData["response"] = response.Body;
             return Ok(response.Body);
         }
+
+        #endregion 余额查询
     }
 }
