@@ -131,11 +131,11 @@ namespace TplDemo
 
             #endregion 注册http上下文访问器
 
-            #region 填充用户信息
+            #region 填充用户信息注入
 
             services.AddScoped<IUser, User>();
 
-            #endregion 填充用户信息
+            #endregion 填充用户信息注入
 
             #region 支付注入
 
