@@ -92,6 +92,18 @@ namespace TplDemo.Controllers
 
         #endregion 添加菜单
 
+        #region 获取菜单详情信息
+
+        /// <summary>获取菜单详情信息</summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<PageModel<Permission>> Getdetails(int id)
+        {
+            return new PageModel<Permission>() { data = await dbpermissionIServices.QueryById(id) };
+        }
+
+        #endregion 获取菜单详情信息
+
         #region 编辑菜单
 
         /// <summary>编辑菜单</summary>
