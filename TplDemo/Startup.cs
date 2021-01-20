@@ -82,7 +82,7 @@ namespace TplDemo
                 // 解决 前端数字string类型传后台int 类型接收报400错误
                 options.JsonSerializerOptions.Converters.Add(new IntToStringConverter());
                 // 驼峰格式
-                options.JsonSerializerOptions.PropertyNamingPolicy = null;//
+                //options.JsonSerializerOptions.PropertyNamingPolicy = null;//
             });
             services.Configure<IISServerOptions>(options =>
             {
@@ -181,9 +181,9 @@ namespace TplDemo
 
             #region 添加日志
 
-            log4net.LogManager.GetLogger("");
+            // log4net.LogManager.GetLogger("");
 
-            logger.CreateLogger("");
+            // logger.CreateLogger("");
             logger.AddLog4Net();
 
             #endregion 添加日志

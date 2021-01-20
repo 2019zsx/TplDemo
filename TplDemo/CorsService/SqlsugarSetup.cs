@@ -21,9 +21,9 @@ namespace TplDemo.CorsService
         /// <param name="services"></param>
         public static void AddSqlsugarSetup(this IServiceCollection services)
         {
-            ICacheService myCache = new SugarCache();// 缓存
             if (services == null) throw new ArgumentNullException(nameof(services));
-
+            // 缓存
+            ICacheService myCache = new SugarCache();
             // 把多个连接对象注入服务，这里必须采用Scope，因为有事务操作
             services.AddScoped<ISqlSugarClient>(o =>
             {
@@ -66,21 +66,12 @@ namespace TplDemo.CorsService
                           {
                               OnDiffLogEvent = it =>
                               {
-                                  //var editBeforeData = it.BeforeData;//操作前记录  包含： 字段描述 列名 值 表名 表描述
-                                  //var editAfterData = it.AfterData;//操作后记录   包含： 字段描述 列名 值  表名 表描述
-                                  //var sql = it.Sql;
-                                  //var parameter = it.Parameters;
-                                  //var data = it.BusinessData;//这边会显示你传进来的对象
-                                  //var time = it.Time;
-                                  //var diffType = it.DiffType;//enum insert 、update and delete
-
-                                  //Write logic
                               },
                               OnLogExecuting = (sql, p) =>
-                                      {
-                                          string Parameter = GetParas(p);
-                                          // Log.Error($"{sql}---{Parameter}");
-                                      }
+                              {
+                                  string Parameter = GetParas(p);
+                                  // CreateLog.Info(Parameter)
+                              }
                           },
                           MoreSettings = new ConnMoreSettings()
                           {

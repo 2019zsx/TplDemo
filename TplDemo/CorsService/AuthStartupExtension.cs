@@ -28,6 +28,8 @@ namespace TplDemo.CorsService
              {
                  options.TokenValidationParameters = new TokenValidationParameters
                  {
+                     // AudienceValidator = (m, n, z) => { //这里采用动态验证的方式，在重新登陆时，刷新token，旧token就强制失效了
+                     // return m != null && m.FirstOrDefault().Equals(jwtConfig.Audience); },
                      ValidAudience = jwtConfig.Audience,
                      ValidateAudience = true,
                      ValidIssuer = jwtConfig.Issuer,

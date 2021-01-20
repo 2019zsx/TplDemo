@@ -118,9 +118,6 @@
             <summary>添加日志</summary>
             <returns></returns>
         </member>
-        <member name="T:TplDemo.Controllers.PaymentController">
-            <summary>支付控制器</summary>
-        </member>
         <member name="T:TplDemo.Controllers.PermissionController">
             <summary>权限管理</summary>
         </member>
@@ -139,6 +136,11 @@
         <member name="M:TplDemo.Controllers.PermissionController.Create(TplDemo.Model.ViewModel.ViewCreatePermission)">
             <summary>添加菜单</summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TplDemo.Controllers.PermissionController.Getdetails(System.Int32)">
+            <summary>获取菜单详情信息</summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:TplDemo.Controllers.PermissionController.Edit(TplDemo.Model.ViewModel.ViewEditPermission)">
