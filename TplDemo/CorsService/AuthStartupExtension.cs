@@ -64,6 +64,8 @@ namespace TplDemo.CorsService
             return services;
         }
 
+        /// <summary></summary>
+        /// <param name="app"></param>
         public static void UseAuthService(this IApplicationBuilder app)
         {
             //认证中间件
