@@ -14,6 +14,7 @@ using TplDemo.Common.Config;
 
 namespace TplDemo.CorsService
 {
+    /// <summary></summary>
     public static class AuthStartupExtension
     {
         public static IServiceCollection AddRayAuthService(this IServiceCollection services, JWTConfig jwtConfig)

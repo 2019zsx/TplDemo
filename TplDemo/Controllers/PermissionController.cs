@@ -16,6 +16,7 @@ namespace TplDemo.Controllers
     /// <summary>权限管理</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class PermissionController : ControllerBase
     {
         private IUser user;
@@ -36,7 +37,6 @@ namespace TplDemo.Controllers
         /// <returns></returns>
 
         [HttpGet]
-        [Authorize]
         public async Task<PageModel<List<ViewMenuTree>>> GetMenuTree()
         {
             var data = await dbpermissionIServices.GetMenuTree(user.role);
@@ -50,7 +50,6 @@ namespace TplDemo.Controllers
 
         /// <summary>获取所有菜单</summary>
         [HttpGet]
-        [Authorize]
         public async Task<PageModel<List<ViewMenuTree>>> GetMenuTreeAll()
         {
             var data = await dbpermissionIServices.GetMenuTreeAll();
@@ -65,7 +64,6 @@ namespace TplDemo.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public async Task<PageModel<object>> Create(ViewCreatePermission model)
         {
             var pageModel = new PageModel<object>();
@@ -97,6 +95,7 @@ namespace TplDemo.Controllers
         /// <summary>获取菜单详情信息</summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public async Task<PageModel<Permission>> Getdetails(int id)
         {
             return new PageModel<Permission>() { data = await dbpermissionIServices.QueryById(id) };
@@ -110,7 +109,6 @@ namespace TplDemo.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut]
-        [Authorize]
         public async Task<PageModel<object>> Edit(ViewEditPermission model)
         {
             var pageModel = new PageModel<object>();
@@ -144,7 +142,6 @@ namespace TplDemo.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize]
         public async Task<PageModel<object>> Del(int id)
         {
             var pageModel = new PageModel<object>();

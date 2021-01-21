@@ -1,6 +1,7 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.V2;
 using Essensoft.AspNetCore.Payment.WeChatPay.V2.Notify;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,7 @@ namespace TplDemo.Controllers
     /// <summary>微信回调</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class WeChatPayNotifyController : Controller
     {
         private readonly IWeChatPayNotifyClient _client;

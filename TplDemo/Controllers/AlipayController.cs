@@ -1,6 +1,7 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -16,6 +17,7 @@ namespace TplDemo.Controllers
     /// <summary>支付宝下单控制器&gt;https://gitee.com/essensoft/payment(支付文档说明)</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class AlipayController : ControllerBase
     {
         /// <summary>https://gitee.com/essensoft/payment(支付文档说明)</summary>
