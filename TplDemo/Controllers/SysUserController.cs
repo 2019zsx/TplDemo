@@ -15,12 +15,14 @@ using SqlSugar;
 using TplDemo.Repository.UnitOfWork;
 using TplDemo.Common.Helper;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TplDemo.Controllers
 {
     /// <summary>用户信息</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class SysUserController : ControllerBase
     {
         /// <summary>获取用户信息</summary>

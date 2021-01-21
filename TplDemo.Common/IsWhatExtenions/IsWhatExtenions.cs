@@ -216,5 +216,11 @@ namespace TplDemo.Common.IsWhatExtenions
         {
             return (thisValue ?? "").ToString().Replace("Bearer ", "");
         }
+
+        public static bool IsEmpty(this object thisValue)
+        {
+            if (thisValue == null || thisValue == DBNull.Value) return true;
+            return thisValue.ToString() == "";
+        }
     }
 }

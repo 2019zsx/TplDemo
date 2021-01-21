@@ -1,5 +1,6 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -13,6 +14,7 @@ namespace TplDemo.Controllers
     /// <summary>支付宝回调</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class AlipayNotifyController : Controller
     {
         private readonly IAlipayNotifyClient _client;

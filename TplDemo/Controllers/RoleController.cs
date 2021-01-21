@@ -11,12 +11,14 @@ using TplDemo.Model.DataModel;
 using TplDemo.Model.ViewModel;
 using SqlSugar;
 using TplDemo.Common.IsWhatExtenions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TplDemo.Controllers
 {
     /// <summary>角色信息</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class RoleController : ControllerBase
     {
         #region
