@@ -24,6 +24,7 @@ using TplDemo.Extensions.Mapper;
 using TplDemo.Common.Helper;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.Alipay;
+using TplDemo.Common.Filter;
 
 namespace TplDemo
 {
@@ -73,7 +74,11 @@ namespace TplDemo
             #region ×¢²á¿ØÖÆÆ÷
 
             services
-           .AddControllers()
+           .AddControllers(options =>
+           {
+               options.Filters.Add(typeof(CustomResultFilter));
+               options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+           })
             .AddJsonOptions(options =>
             {
                 // options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
