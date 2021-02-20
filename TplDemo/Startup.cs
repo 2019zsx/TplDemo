@@ -25,6 +25,7 @@ using TplDemo.Common.Helper;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.Alipay;
 using TplDemo.Common.Filter;
+using SqlSugar.IOC;
 
 namespace TplDemo
 {
@@ -120,7 +121,28 @@ namespace TplDemo
 
             #region 数据库连接服务注入
 
-            services.AddSqlsugarSetup();
+            var configuration = BaseConfigModel.Configuration;
+            // 连接字符串
+            var listConfig = new List<IocConfig>();
+            var databaseConfig = configuration.GetSection("database").Get<List<Dbconfig>>();
+            if (databaseConfig.Count == 0)
+            {
+                throw new ArgumentNullException("请配置数据库连接");//
+            }
+
+            databaseConfig.Where(c => c.isclose == false).ToList().ForEach(m =>
+            {
+                listConfig.Add(new IocConfig()
+                {
+                    ConfigId = m.dbname,
+                    ConnectionString = m.dburl,
+                    DbType = (IocDbType)m.dbtype,
+                    IsAutoCloseConnection = true,
+                }
+               );
+            });
+            services.AddSqlSugar(listConfig);
+            // services.AddSqlsugarSetup();
 
             #endregion 数据库连接服务注入
 

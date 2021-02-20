@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SqlSugar;
+using SqlSugar.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,9 +15,7 @@ namespace TplDemo.Extensions.Authorization
 {
     public class JwtHelper : BaseConfigModel
     {
-        /// <summary>
-        /// 获取Token
-        /// </summary>
+        /// <summary>获取Token</summary>
         /// <param name="uid">用户id</param>
         /// <param name="requesttype">类型（web或app）</param>
         /// <returns></returns>
@@ -42,9 +41,7 @@ namespace TplDemo.Extensions.Authorization
             return viewToken;
         }
 
-        /// <summary>
-        /// 生成token
-        /// </summary>
+        /// <summary>生成token</summary>
         /// <param name="Expires"></param>
         /// <param name="uid"></param>
         /// <returns></returns>
@@ -106,9 +103,7 @@ namespace TplDemo.Extensions.Authorization
             return requestTypeModel;
         }
 
-        /// <summary>
-        /// 验证Token信息
-        /// </summary>
+        /// <summary>验证Token信息</summary>
         /// <param name="token"></param>
         /// <param name="Principal"></param>
         /// <returns></returns>
@@ -127,9 +122,7 @@ namespace TplDemo.Extensions.Authorization
             return true;
         }
 
-        /// <summary>
-        /// 验证token
-        /// </summary>
+        /// <summary>验证token</summary>
         /// <param name="token"></param>
         /// <returns></returns>
         public static ClaimsPrincipal GetPrincipal(string token)

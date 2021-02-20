@@ -1,4 +1,6 @@
 ﻿using SqlSugar;
+using SqlSugar.Extensions;
+using SqlSugar.IOC;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,8 +17,10 @@ namespace TplDemo.Repository.BASE
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         private readonly IUnitOfWork _unitOfWork;
+
         private SqlSugarClient _dbBase;
 
+        //= DbTransient.Sugar
         private ISqlSugarClient _db
         {
             get
@@ -47,7 +51,7 @@ namespace TplDemo.Repository.BASE
         public BaseRepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _dbBase = unitOfWork.GetDbClient();
+            _dbBase = DbTransient.Sugar;// unitOfWork.GetDbClient();
         }
 
         public async Task<TEntity> QueryById(object objId)

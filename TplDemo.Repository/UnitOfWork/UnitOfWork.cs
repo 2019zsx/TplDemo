@@ -1,4 +1,5 @@
 ﻿using SqlSugar;
+using SqlSugar.IOC;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +10,13 @@ namespace TplDemo.Repository.UnitOfWork
     {
         private readonly ISqlSugarClient _sqlSugarClient;
 
-        public UnitOfWork(ISqlSugarClient sqlSugarClient)
+        //public UnitOfWork(ISqlSugarClient sqlSugarClient)
+        //{
+        //    _sqlSugarClient = sqlSugarClient;
+        //}
+        public UnitOfWork()
         {
-            _sqlSugarClient = sqlSugarClient;
+            _sqlSugarClient = DbTransient.Sugar;
         }
 
         /// <summary>获取DB，保证唯一性</summary>

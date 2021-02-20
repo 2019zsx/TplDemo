@@ -18,6 +18,7 @@ using TplDemo.Common.HttpContextUser;
 using System.Security.Claims;
 using TplDemo.Common.TokenModel;
 using SqlSugar;
+using SqlSugar.Extensions;
 
 namespace TplDemo.Controllers
 {
@@ -144,7 +145,6 @@ namespace TplDemo.Controllers
         [Authorize]
         public async Task<PageModel<ViewUserinfo>> GetUserinfo()
         {
-            int s = "0".ObjToInt();
             var pageModel = new PageModel<ViewUserinfo>();
             ViewUserinfo viewUserinfo = new ViewUserinfo();
             var usermodel = await dbsysUserInfoIServices.QueryById(dbUse.uid);
