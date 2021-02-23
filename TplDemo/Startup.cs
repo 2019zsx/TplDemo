@@ -77,7 +77,7 @@ namespace TplDemo
             services
            .AddControllers(options =>
            {
-               options.Filters.Add(typeof(CustomResultFilter));
+               options.Filters.Add(typeof(CustomResultFilter));// 实体特性使用
                options.Filters.Add(typeof(CustomExceptionFilterAttribute));
            })
             .AddJsonOptions(options =>

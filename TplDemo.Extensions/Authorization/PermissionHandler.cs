@@ -10,27 +10,21 @@ using TplDemo.Common.Message;
 
 namespace TplDemo.Extensions.Authorization
 {
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
     {
         public IAuthenticationSchemeProvider Schemes;
 
-        /// <summary>
-        /// 获取上下文对象
-        /// </summary>
+        /// <summary>获取上下文对象</summary>
         private IHttpContextAccessor contextAccessor;
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         //private Baidu_userIServices dbbaidu_UserIServices;
 
         public PermissionHandler(IHttpContextAccessor _contextAccessor, IAuthenticationSchemeProvider schemes)
         {
             Schemes = schemes;
-            //  dbbaidu_UserIServices = _baidu_UserIServices;
+            // dbbaidu_UserIServices = _baidu_UserIServices;
             contextAccessor = _contextAccessor;
         }
 
@@ -45,42 +39,6 @@ namespace TplDemo.Extensions.Authorization
                 var isAuthenticated = context.User.Identity.IsAuthenticated;
                 if (isAuthenticated)
                 {
-                    //获取请求uid值
-                    //string request_uid = "";
-                    //if (httpContext.Method.ToLower() == "get")
-                    //{
-                    //    request_uid = httpContext.Query["uid"];
-                    //}
-                    //else
-                    //{
-                    //    long? length = httpContext.ContentLength;
-                    //    if (length != null && length > 0)
-                    //    {
-                    //        httpContext.Body.Position = 0;
-                    //        // 使用这个方式读取，并且使用异步
-                    //        StreamReader streamReader = new StreamReader(httpContext.Body, Encoding.UTF8);
-                    //        request_uid = (JsonData.Deserialize<Viewparameter>(streamReader.ReadToEnd()).uid ?? ""); ;
-                    //    }
-                    //}
-
-                    ////无权限访问
-                    //if (request_uid.IsNullOrEmpty())
-                    //{
-                    //    context.Fail();
-                    //}
-                    // 获取token值
-                    //int uid = context.User.Claims.SingleOrDefault(s => s.Type == JwtRegisteredClaimNames.Sub).Value.ObjToInt();
-                    ////if (uid != request_uid.ObjToInt())
-                    ////{
-                    ////    context.Fail();
-                    ////    ;
-                    ////}
-                    //var userdata = dbbaidu_UserIServices.Query(c => c.Id == uid && c.Block == false);
-                    //if (userdata.Count() == 0)
-                    //{
-                    //    HttpMsg httpMsg = new HttpMsg();
-                    //    httpMsg.HttpContextmsg(StatusCodes.Status200OK, contextAccessor, "无权限访问", 403);
-                    //}
                     context.Succeed(requirement);
                 }
             }
@@ -94,9 +52,7 @@ namespace TplDemo.Extensions.Authorization
 
         #region MyRegion
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <summary></summary>
         /// <param name="context"></param>
         /// <param name="requirement"></param>
         /// <returns></returns>

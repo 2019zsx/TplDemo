@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using TplDemo.Common.Message;
 
 namespace TplDemo.Common.Filter
 {
-    /// <summary></summary>
+    /// <summary>实体特性使用</summary>
     public class CustomResultFilter : ActionFilterAttribute
     {
         /// <summary></summary>
@@ -19,7 +20,12 @@ namespace TplDemo.Common.Filter
             {
                 var result = new PageModel<object>();
                 result.state = 30002;
-                result.msg = context.ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage;
+                var ModelState = context.ModelState.Values.Where(c => c.ValidationState != ModelValidationState.Valid).FirstOrDefault().Errors.FirstOrDefault();
+                if (ModelState != null)
+                {
+                    result.msg = ModelState.ErrorMessage;
+                }
+
                 context.Result = new JsonResult(result);
             }
             else
