@@ -78,11 +78,10 @@ namespace TplDemo
            .AddControllers(options =>
            {
                options.Filters.Add(typeof(CustomResultFilter));// 实体特性使用
-               options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+               options.Filters.Add(typeof(CustomExceptionFilterAttribute));// 错误捕捉
            })
             .AddJsonOptions(options =>
             {
-                // options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
                 //时间格式转换
                 options.JsonSerializerOptions.Converters.Add(new DateTimeNullableConverter());
                 // 解决 前端数字string类型传后台int 类型接收报400错误

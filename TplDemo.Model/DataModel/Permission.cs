@@ -11,10 +11,6 @@ namespace TplDemo.Model.DataModel
     [SugarTable("Permission")]
     public partial class Permission
     {
-        public Permission()
-        {
-        }
-
         [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         /// <summary></summary>
         public int ID { get; set; }
@@ -43,6 +39,7 @@ namespace TplDemo.Model.DataModel
         /// <summary>是否启用</summary>
         public bool isEnable { get; set; }
 
+        /// <summary>模板</summary>
         public string component { get; set; }
     }
 }

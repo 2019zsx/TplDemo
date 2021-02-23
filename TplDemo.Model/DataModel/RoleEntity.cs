@@ -15,9 +15,8 @@ namespace TplDemo.Model.DataModel
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true, ColumnName = "ID")]
         public int ID { get; set; }
 
-        [SugarColumn(ColumnName = "RoleName")]
-
         /// <summary>角色名称</summary>
+        [SugarColumn(ColumnName = "RoleName")]
         public string roleName { get; set; }
 
         /// <summary>描述</summary>
@@ -25,14 +24,12 @@ namespace TplDemo.Model.DataModel
         [SugarColumn(ColumnName = "describe")]
         public string describe { get; set; }
 
-        [SugarColumn(ColumnName = "IsDeleted")]
         /// <summary>是否启用</summary>
-
+        [SugarColumn(ColumnName = "IsDeleted")]
         public bool isDeleted { get; set; }
 
-        [SugarColumn(ColumnName = "createTime")]
         /// <summary>添加时间</summary>
-
+        [SugarColumn(ColumnName = "createTime")]
         public DateTime? createTime { get; set; }
     }
 }

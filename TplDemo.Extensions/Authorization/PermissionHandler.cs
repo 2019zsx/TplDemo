@@ -18,9 +18,6 @@ namespace TplDemo.Extensions.Authorization
         /// <summary>获取上下文对象</summary>
         private IHttpContextAccessor contextAccessor;
 
-        /// <summary></summary>
-        //private Baidu_userIServices dbbaidu_UserIServices;
-
         public PermissionHandler(IHttpContextAccessor _contextAccessor, IAuthenticationSchemeProvider schemes)
         {
             Schemes = schemes;
@@ -49,58 +46,5 @@ namespace TplDemo.Extensions.Authorization
             }
             return Task.CompletedTask;
         }
-
-        #region MyRegion
-
-        /// <summary></summary>
-        /// <param name="context"></param>
-        /// <param name="requirement"></param>
-        /// <returns></returns>
-        //protected override async Task HandleRequirementAsync(
-        //  AuthorizationHandlerContext context,
-        //    PermissionRequirement requirement)
-        //{
-        //    //AuthorizationFilterContext filterContext = context.Resource as AuthorizationFilterContext;
-        //    //HttpContext httpContext = filterContext.HttpContext;
-        //    //AuthenticateResult result = await httpContext.AuthenticateAsync(Schemes.GetDefaultAuthenticateSchemeAsync().Result.Name);
-        //    // 先判断Id是否存在
-        //    int uid = context.User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub).Value.ObjToInt();
-        //    var isAuthenticated = context.User.Identity.IsAuthenticated;
-        //    if (isAuthenticated)
-        //    {
-        //        if (uid == 0)
-        //        {
-        //            context.Fail();
-        //        }
-        //        else
-        //        {
-        //            var userdata = await dbbaidu_UserIServices.Query(c => c.Id == uid && c.Block == false);
-        //            if (userdata.Count() == 0)
-        //            {
-        //                context.Fail();
-        //            }
-        //            context.Succeed(requirement);
-        //        }
-        //    }
-
-        //    //if (result.Succeeded)
-        //    //{
-        //    //    if (uid == 0)
-        //    //    {
-        //    //        context.Fail();
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        var userdata = await dbbaidu_UserIServices.Query(c => c.Id == uid && c.Block == true);
-        //    //        if (userdata.Count() == 0)
-        //    //        {
-        //    //            context.Fail();
-        //    //        }
-        //    //        context.Succeed(requirement);
-        //    //    }
-        //    //}
-        //}
-
-        #endregion MyRegion
     }
 }
