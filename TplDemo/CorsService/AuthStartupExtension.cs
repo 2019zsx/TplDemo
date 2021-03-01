@@ -52,6 +52,7 @@ namespace TplDemo.CorsService
                      },
                      OnTokenValidated = context =>
                      {
+                         //验证不通过
                          //var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
                          //var claims = context.Principal.Claims;
                          //var _value = claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value;

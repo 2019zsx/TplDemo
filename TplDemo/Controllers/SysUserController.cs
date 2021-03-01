@@ -163,8 +163,6 @@ namespace TplDemo.Controllers
                 {
                     throw new Exception("添加用户失败");
                 }
-                // await userRoleIServices.DeleteByWhere(c => c.UserID == uid); int[] roleidarr =
-                // model.roleId.Split(',').Select(c => c.ObjToInt()).ToArray();
                 int[] roleidarr = model.roleId.ToArray();
                 List<UserRoleEntity> list = new List<UserRoleEntity>();
                 for (int i = 0; i < roleidarr.Length; i++)
@@ -321,7 +319,12 @@ namespace TplDemo.Controllers
         public async Task<PageModel<object>> isDelete(int id, bool isDelete)
         {
             var pageModel = new PageModel<object>();
-            var msg = await dbsysUserInfoIServices.Update(new sysUserInfoEntity() { Id = id, isDeleted = isDelete }, new List<string>() { "Id", "IsDelete" });
+            var msg = await dbsysUserInfoIServices.Update(new sysUserInfoEntity()
+            {
+                Id = id,
+                isDeleted = isDelete
+            },
+                new List<string>() { "Id", "IsDelete" });
             if (!msg)
             {
                 pageModel.state = 30002;

@@ -24,11 +24,6 @@ namespace TplDemo.Repository.BASE
         {
             get
             {
-                /* 如果要开启多库支持，
-                 * 1、在appsettings.json 中开启MutiDBEnabled节点为true，必填
-                 * 2、设置一个主连接的数据库ID，节点MainDB，对应的连接字符串的Enabled也必须true，必填
-                 */
-
                 if (typeof(TEntity).GetTypeInfo().GetCustomAttributes(typeof(SugarTable), true).FirstOrDefault((x => x.GetType() == typeof(SugarTable))) is SugarTable sugarTable && !string.IsNullOrEmpty(sugarTable.TableDescription))
                 {
                     _dbBase.ChangeDatabase(sugarTable.TableDescription.ToLower());// 从库
@@ -432,13 +427,12 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
         }
 
-        /// <summary>
-        ///实体转换
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <summary></summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="whereExpression"></param>
         /// <param name="selectExpression"></param>
+        /// <param name="strOrderByFileds"></param>
+        /// <param name="top"></param>
         /// <returns></returns>
 
         public async Task<List<TResult>> Query<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, string strOrderByFileds, int top)
@@ -446,6 +440,17 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).Take(top).Select<TResult>(selectExpression).ToListAsync();
         }
 
+        /// <summary></summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="joinExpression"></param>
+        /// <param name="selectExpression"></param>
+        /// <param name="whereLambda"></param>
+        /// <param name="intPageIndex"></param>
+        /// <param name="intPageSize"></param>
+        /// <param name="strOrderByFileds"></param>
+        /// <returns></returns>
         public async Task<PageModel<List<TResult>>> GetQueryablePage<T, T2, TResult>(
               Expression<Func<T, T2, object[]>> joinExpression,
               Expression<Func<T, T2, TResult>> selectExpression,
@@ -456,6 +461,14 @@ namespace TplDemo.Repository.BASE
             return new PageModel<List<TResult>> { count = totalCount, data = list, state = 10001, msg = "获取成功" };
         }
 
+        /// <summary></summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="whereExpression"></param>
+        /// <param name="selectExpression"></param>
+        /// <param name="intPageIndex"></param>
+        /// <param name="intPageSize"></param>
+        /// <param name="strOrderByFileds"></param>
+        /// <returns></returns>
         public async Task<PageModel<List<TResult>>> QueryPageTResult<TResult>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TResult>> selectExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null)
         {
             RefAsync<int> totalCount = 0;

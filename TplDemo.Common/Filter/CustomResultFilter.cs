@@ -20,6 +20,7 @@ namespace TplDemo.Common.Filter
             {
                 var result = new PageModel<object>();
                 result.state = 30002;
+                // 获取验证不通过的
                 var ModelState = context.ModelState.Values.Where(c => c.ValidationState != ModelValidationState.Valid).FirstOrDefault().Errors.FirstOrDefault();
                 if (ModelState != null)
                 {

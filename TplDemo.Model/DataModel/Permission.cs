@@ -11,8 +11,8 @@ namespace TplDemo.Model.DataModel
     [SugarTable("Permission")]
     public partial class Permission
     {
-        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         /// <summary></summary>
+        [SugarColumn(IsIgnore = false, IsPrimaryKey = true, IsIdentity = true)]
         public int ID { get; set; }
 
         /// <summary>名称</summary>
