@@ -9,8 +9,6 @@ namespace TplDemo.Common.HttpResponse
 {
     public class HttpResponseApi<T> where T : class, new()
     {
-        // private static string Wwwurl = ConfigurationManager.AppSettings["DSJURL"].ToString();
-
         public T Get(apiurl requesturl, string url, object pars, string Token = "", bool _bool = false)
         {
             var type = RestSharp.Method.GET;

@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using TplDemo.Extensions.Authorization;
 
-//using TplDemo.Common.Authorization;
-
-namespace TplDemo.CorsService
-
+namespace TplDemo.Extensions.ServiceExtensions
 {
     public static class AuthorizationExtension
     {

@@ -4,15 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TplDemo.Common;
 using TplDemo.Common.Config;
 
-namespace TplDemo.CorsService
+namespace TplDemo.Extensions.ServiceExtensions
 {
     /// <summary></summary>
     public static class AuthStartupExtension
@@ -71,8 +68,8 @@ namespace TplDemo.CorsService
         public static void UseAuthService(this IApplicationBuilder app)
         {
             //认证中间件
+            ;
             app.UseAuthentication();
-
             //授权中间件
             app.UseAuthorization();
         }

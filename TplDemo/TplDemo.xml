@@ -334,20 +334,6 @@
         <member name="M:TplDemo.Controllers.WeChatPayNotifyController.Refund">
             <summary>退款结果通知</summary>
         </member>
-        <member name="T:TplDemo.CorsService.AuthStartupExtension">
-            <summary></summary>
-        </member>
-        <member name="M:TplDemo.CorsService.AuthStartupExtension.UseAuthService(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            <summary></summary>
-            <param name="app"></param>
-        </member>
-        <member name="T:TplDemo.CorsService.SqlsugarSetup">
-            <summary>SqlSugar 启动服务</summary>
-        </member>
-        <member name="M:TplDemo.CorsService.SqlsugarSetup.AddSqlsugarSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary></summary>
-            <param name="services"></param>
-        </member>
         <member name="M:TplDemo.Program.CreateHostBuilder(System.String[])">
             <summary></summary>
             <param name="args"></param>

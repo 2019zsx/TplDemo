@@ -27,7 +27,7 @@ namespace TplDemo.Common.Helper
             }
         }
 
-        public static void Configure(string repositoryName = "NETCoreRepository", string configFile = "log4net.config")
+        public static void Configure(string repositoryName = "TplDemoRepository", string configFile = "log4net.config")
         {
             repository = LogManager.CreateRepository(repositoryName);
             XmlConfigurator.Configure(repository, new FileInfo(configFile));

@@ -6,14 +6,13 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace TplDemo.CorsService
+namespace TplDemo.Extensions.ServiceExtensions
 {
     public static class SwaggerExtension
     {
-        public static IServiceCollection AddSwaggerService(this IServiceCollection services)
+        public static IServiceCollection AddSwaggerService(this IServiceCollection services, string BaseDirectory)
         {
             services.AddSwaggerGen(c =>
             {
@@ -29,9 +28,9 @@ namespace TplDemo.CorsService
                     var controllerAction = apiDesc.ActionDescriptor as ControllerActionDescriptor;
                     return controllerAction.ControllerName + "-" + controllerAction.ActionName;
                 });
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "TplDemo.xml");
+                var filePath = Path.Combine(BaseDirectory, "TplDemo.xml");
                 c.IncludeXmlComments(filePath, true);
-                filePath = Path.Combine(System.AppContext.BaseDirectory, "TplDemo.Model.xml");
+                filePath = Path.Combine(BaseDirectory, "TplDemo.Model.xml");
                 c.IncludeXmlComments(filePath, true);
             });
             return services;

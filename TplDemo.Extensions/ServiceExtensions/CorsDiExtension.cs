@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace TplDemo.CorsService
+namespace TplDemo.Extensions.ServiceExtensions
 {
     public static class CorsDiExtension
     {
@@ -31,14 +30,11 @@ namespace TplDemo.CorsService
             //    //    .AllowCredentials();
             //    //});
 
-            //    //options.AddPolicy("Limit", policy =>
-            //    //{
-            //    //    policy
-            //    //    //.WithOrigins("http://localhost:9528", "http://localhost:9529", "http://localhost:9527", "http://106.15.38.78:81", "http://106.15.38.78:80", "http://106.15.38.78:3301")
-            //    //    .AllowAnyHeader()
-            //    //    .AllowAnyMethod()
-            //    //    .AllowCredentials();
-            //    //});
+            // //options.AddPolicy("Limit", policy => //{ // policy //
+            // //.WithOrigins("http://localhost:9528", "http://localhost:9529",
+            // "http://localhost:9527", "http://106.15.38.78:81", "http://106.15.38.78:80",
+            // "http://106.15.38.78:3301") // .AllowAnyHeader() // .AllowAnyMethod() //
+            // .AllowCredentials(); //});
 
             //    /*
             //    //浏览器会发起2次请求,使用OPTIONS发起预检请求，第二次才是api异步请求

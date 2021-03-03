@@ -373,7 +373,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
         }
 
-        /// <summary></summary>
+        /// <summary>获取单挑时间数据</summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
@@ -382,7 +382,7 @@ namespace TplDemo.Repository.BASE
             return await _db.Ado.GetDateTimeAsync(sql, parameters);
         }
 
-        /// <summary></summary>
+        /// <summary>获取单条dynamic数据</summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
@@ -410,6 +410,11 @@ namespace TplDemo.Repository.BASE
             return await _db.Ado.GetStringAsync(sql, parameters);
         }
 
+        /// <summary>获取自定集合数据</summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public async Task<List<TResult>> GetQuerylistTResult<TResult>(string sql, object parameters = null)
         {
             return await _db.Ado.SqlQueryAsync<TResult>(sql, parameters);
@@ -479,6 +484,14 @@ namespace TplDemo.Repository.BASE
 
             int pageCount = (Math.Ceiling(totalCount.ObjToDecimal() / intPageSize.ObjToDecimal())).ObjToInt();
             return new PageModel<List<TResult>>() { count = totalCount, data = list };
+        }
+
+        /// <summary>追加表字段</summary>
+        /// <param name="tablename"></param>
+        /// <param name="dbColumnInfo"></param>
+        public void AddColumn(string tablename, DbColumnInfo dbColumnInfo)
+        {
+            _db.DbMaintenance.AddColumn(tablename, dbColumnInfo);
         }
     }
 }
