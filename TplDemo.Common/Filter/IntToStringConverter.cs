@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace TplDemo.Common.Helper
+namespace TplDemo.Common.Filter
 {
     /// <summary>解决string 数字转int 类型</summary>
     public class IntToStringConverter : JsonConverter<int>

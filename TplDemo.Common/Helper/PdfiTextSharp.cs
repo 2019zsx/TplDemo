@@ -6,16 +6,14 @@ using System.Text;
 
 namespace TplDemo.Common.Helper
 {
-   public   class PdfiTextSharp
+    /// <summary>生成pdf</summary>
+    public class PdfiTextSharp
     {
-        /// <summary>
-        ///  多个图片合并成Pdf
-        /// </summary>
+        /// <summary>多个图片合并成Pdf</summary>
         /// <param name="filesimg">图片流集合</param>
         /// <returns></returns>
         public byte[] imgPdfcreate(List<Byte[]> filesimg)
         {
-          
             MemoryStream outputStream = new MemoryStream();
             iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 25, 25);
             try
@@ -39,7 +37,6 @@ namespace TplDemo.Common.Helper
                 outputStream.Close();
                 return null;
             }
-
         }
     }
 }
