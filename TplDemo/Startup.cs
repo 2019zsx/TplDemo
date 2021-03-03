@@ -84,7 +84,7 @@ namespace TplDemo
             {
                 //时间格式转换
                 options.JsonSerializerOptions.Converters.Add(new DateTimeNullableConverter());
-                // 解决 前端数字string类型传后台int 类型接收报400错误
+                // 解决 前端数字字符串传后台int 类型接收报400错误
                 options.JsonSerializerOptions.Converters.Add(new IntToStringConverter());
                 // 驼峰格式
                 //options.JsonSerializerOptions.PropertyNamingPolicy = null;//

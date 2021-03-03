@@ -9,6 +9,9 @@ namespace TplDemo.Extensions.ServiceExtensions
 {
     public static class AuthorizationExtension
     {
+        /// <summary>权限认证</summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddAuthorizationService(this IServiceCollection services)
         {
             services.AddAuthorization(options =>

@@ -32,11 +32,14 @@ namespace TplDemo.Repository.BASE
                 {
                     _dbBase.ChangeDatabase("main");
                 }
+                // 缓存 _dbBase.CurrentConnectionConfig.ConfigureExternalServices = new
+                // ConfigureExternalServices() { DataInfoCacheService=};
                 _dbBase.Aop.OnLogExecuted = (sql, pars) => //SQL执行完
                 {
                     string time = _dbBase.Ado.SqlExecutionTime.ToString();
                     // Console.Write("time:" + db.Ado.SqlExecutionTime.ToString());//输出SQL执行时间
                 };
+
                 _dbBase.Aop.OnLogExecuting = (sql, pars) => //SQL执行前
                 {
                 };
