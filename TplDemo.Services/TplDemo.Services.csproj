@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TplDemo.Common\TplDemo.Common.csproj" />
     <ProjectReference Include="..\TplDemo.IServices\TplDemo.IServices.csproj" />
     <ProjectReference Include="..\TplDemo.Repository\TplDemo.Repository.csproj" />
   </ItemGroup>

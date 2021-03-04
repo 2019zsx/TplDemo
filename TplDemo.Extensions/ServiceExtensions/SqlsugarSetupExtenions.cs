@@ -11,7 +11,7 @@ using TplDemo.Common.Config;
 
 namespace TplDemo.Extensions.ServiceExtensions
 {
-    public static class SqlsugarSetup
+    public static class SqlsugarSetupExtenions
     {
         /// <summary></summary>
         /// <param name="services"></param>
