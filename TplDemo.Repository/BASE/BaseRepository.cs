@@ -61,6 +61,7 @@ namespace TplDemo.Repository.BASE
         {
             _unitOfWork = unitOfWork;
             _dbBase = DbTransient.Sugar;
+
             // unitOfWork.GetDbClient();
         }
 
