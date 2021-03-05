@@ -12,7 +12,7 @@ namespace TplDemo.Extensions.ServiceExtensions
 {
     public static class SwaggerExtension
     {
-        public static IServiceCollection AddSwaggerService(this IServiceCollection services, string BaseDirectory)
+        public static IServiceCollection AddSwaggerService(this IServiceCollection services, string BaseDirectory, List<string> xmlname = null, string Description = "TplDemoApi")
         {
             services.AddSwaggerGen(c =>
             {
@@ -20,7 +20,7 @@ namespace TplDemo.Extensions.ServiceExtensions
                 c.AddServer(new OpenApiServer()
                 {
                     Url = "",
-                    Description = ""
+                    Description = Description// 文档名称
                 });
 
                 c.CustomOperationIds(apiDesc =>
@@ -28,10 +28,16 @@ namespace TplDemo.Extensions.ServiceExtensions
                     var controllerAction = apiDesc.ActionDescriptor as ControllerActionDescriptor;
                     return controllerAction.ControllerName + "-" + controllerAction.ActionName;
                 });
-                var filePath = Path.Combine(BaseDirectory, "TplDemo.xml");
-                c.IncludeXmlComments(filePath, true);
-                filePath = Path.Combine(BaseDirectory, "TplDemo.Model.xml");
-                c.IncludeXmlComments(filePath, true);
+
+                #region 循环xml名称
+
+                foreach (var item in xmlname)
+                {
+                    var filePath = Path.Combine(BaseDirectory, item);
+                    c.IncludeXmlComments(filePath, true);
+                }
+
+                #endregion 循环xml名称
             });
             return services;
         }

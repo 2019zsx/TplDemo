@@ -11,9 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CorsService\**" />
+    <Content Remove="CorsService\**" />
+    <EmbeddedResource Remove="CorsService\**" />
+    <None Remove="CorsService\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\DefaultController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
-    <Compile Remove="CorsService\SqlsugarSetup.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +42,5 @@
     <Content Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CorsService\" />
   </ItemGroup>
 </Project>

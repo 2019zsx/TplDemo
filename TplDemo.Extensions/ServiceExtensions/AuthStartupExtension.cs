@@ -68,7 +68,6 @@ namespace TplDemo.Extensions.ServiceExtensions
         public static void UseAuthService(this IApplicationBuilder app)
         {
             //认证中间件
-            ;
             app.UseAuthentication();
             //授权中间件
             app.UseAuthorization();

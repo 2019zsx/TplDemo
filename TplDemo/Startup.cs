@@ -29,8 +29,11 @@ using TplDemo.Extensions.ServiceExtensions;
 
 namespace TplDemo
 {
+    /// <summary></summary>
     public class Startup
     {
+        /// <summary></summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             #region 读取配置文件
@@ -98,14 +101,13 @@ namespace TplDemo
 
             #region 配置Swagger文档
 
-            services.AddSwaggerService(AppContext.BaseDirectory);
+            services.AddSwaggerService(AppContext.BaseDirectory, new List<string>() { "TplDemo.xml", "TplDemo.Model.xml" }, "TplDemoApi");
 
             #endregion 配置Swagger文档
 
             #region 注册授权认证
 
             services.Configure<JWTConfig>(Configuration.GetSection("JwtAuth"));//获取配置文件
-
             var jwtConfig = Configuration.GetSection("JwtAuth").Get<JWTConfig>();
             services.AddRayAuthService(jwtConfig);
 
