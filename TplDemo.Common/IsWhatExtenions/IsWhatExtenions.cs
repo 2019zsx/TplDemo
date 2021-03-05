@@ -6,9 +6,18 @@ using System.Text.RegularExpressions;
 
 namespace TplDemo.Common.IsWhatExtenions
 {
-    /// <summary></summary>
+    /// <summary>验证帮助类</summary>
     public static class IsWhatExtenions
     {
+        /// <summary>获取当前时间的时间戳</summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static string DateToTimeStamp(this DateTime thisValue)
+        {
+            TimeSpan ts = thisValue - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();
+        }
+
         /// <summary>值在的范围？</summary>
         /// <param name="thisValue"></param>
         /// <param name="begin">大于等于begin</param>
@@ -222,5 +231,24 @@ namespace TplDemo.Common.IsWhatExtenions
             if (thisValue == null || thisValue == DBNull.Value) return true;
             return thisValue.ToString() == "";
         }
+
+        #region 去除富文本中的HTML标签
+
+        /// <summary>去除富文本中的HTML标签</summary>
+        /// <param name="html"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string ReplaceHtmlTag(string html, int length = 0)
+        {
+            string strText = System.Text.RegularExpressions.Regex.Replace(html, "<[^>]+>", "");
+            strText = System.Text.RegularExpressions.Regex.Replace(strText, "&[^;]+;", "");
+
+            if (length > 0 && strText.Length > length)
+                return strText.Substring(0, length);
+
+            return strText;
+        }
+
+        #endregion 去除富文本中的HTML标签
     }
 }
