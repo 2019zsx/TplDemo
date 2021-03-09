@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SqlSugar;
+using SqlSugar.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -66,9 +67,7 @@ namespace TplDemo.Common.HttpContextUser
 
         #region 解析 token 获取用户信息
 
-        /// <summary>
-        /// 解析 token 获取用户信息
-        /// </summary>
+        /// <summary>解析 token 获取用户信息</summary>
         /// <param name="token"></param>
         /// <param name="isgetauthorizationtoke">默认是自己传入 ，true 是 Headers 获取</param>
         /// <returns></returns>
