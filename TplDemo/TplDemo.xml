@@ -248,6 +248,9 @@
             <param name="isDelete"></param>
             <returns></returns>
         </member>
+        <member name="T:TplDemo.Controllers.TestController">
+            <summary>测试接口</summary>
+        </member>
         <member name="T:TplDemo.Controllers.WeChatPayController">
             <summary>微信支付</summary>
         </member>
