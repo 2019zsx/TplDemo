@@ -24,7 +24,7 @@ namespace TplDemo.Common.Helper
                 for (int i = 0; i < filesimg.Count; i++)
                 {
                     image = iTextSharp.text.Image.GetInstance(filesimg[i]);
-                    document.NewPage();
+                    // document.NewPage();
                     document.Add(image);
                 }
                 document.Close();
