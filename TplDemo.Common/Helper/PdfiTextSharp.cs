@@ -1,4 +1,5 @@
-﻿using iTextSharp.text.pdf;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,11 @@ namespace TplDemo.Common.Helper
                 for (int i = 0; i < filesimg.Count; i++)
                 {
                     image = iTextSharp.text.Image.GetInstance(filesimg[i]);
-                    // document.NewPage();
+                    image.SetAbsolutePosition(0, 0);//'设置图片的位置在0.0
+                                                    // image.ScaleAbsolute(PageSize.A4);
+                    image.ScaleAbsolute(PageSize.A4);
+                    // image.ScaleAbsolute(PageSize.A4);//'设置图片大小为A4纸大小
+                    document.NewPage();
                     document.Add(image);
                 }
                 document.Close();
