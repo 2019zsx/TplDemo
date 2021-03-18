@@ -27,8 +27,7 @@ namespace TplDemo.Common.Helper
                     image = iTextSharp.text.Image.GetInstance(filesimg[i]);
                     image.SetAbsolutePosition(0, 0);//'设置图片的位置在0.0
                                                     // image.ScaleAbsolute(PageSize.A4);
-                    image.ScaleAbsolute(PageSize.A4);
-                    // image.ScaleAbsolute(PageSize.A4);//'设置图片大小为A4纸大小
+                                                    // image.ScaleAbsolute(PageSize.A4); image.ScaleAbsolute(PageSize.A4);//'设置图片大小为A4纸大小
                     document.NewPage();
                     document.Add(image);
                 }
